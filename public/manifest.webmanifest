@@ -1,0 +1,55 @@
+{
+  "lang": "en-US",
+  "name": "Cosmos.FM",
+  "id": "cosmosfm",
+  "short_name": "cosmosfm",
+  "categories": ["social"],
+  "description": "A Cosmos FM client for KaiOS",
+  "theme_color": "#4da8d7",
+  "background_color": "#ffffff",
+  "icons": [
+    {
+      "src": "/icons/icon_112.png",
+      "type": "image/png",
+      "sizes": "112x112"
+    },
+    {
+      "src": "/icons/icon_56.png",
+      "type": "image/png",
+      "sizes": "56x56"
+    }
+  ],
+  "start_url": "/index.html",
+  "orientation": "portrait-primary",
+  "b2g_features": {
+    "version": "0.2.5",
+    "subtitle": "A Cosmos FM client for KaiOS",
+    "type": "signed",
+    "csp": "default-src *; script-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline'",
+    "permissions": {
+      "audio-channel-content": {
+        "description": "Required to play audio in the background."
+      },
+      "systemXHR": {
+        "description": "Required to download songs and perform other vital functions."
+      },
+      "device-storage:music": {
+        "access": "readwrite",
+        "description": "Required to read and write songs."
+      },
+      "device-storage:sdcard": {
+        "access": "readwrite",
+        "description": "Required to read and write podcasts episodes to external storage."
+      },
+      "volumemanager": {},
+      "mobiledata": {},
+      "wifidata": {},
+      "geolocation": {}
+    },
+    "focus_color": "#4da8d7",
+    "developer": {
+      "name": "Liki Du",
+      "url": "https://likidu.com"
+    }
+  }
+}
