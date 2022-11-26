@@ -9,6 +9,8 @@
   export let list: EditorPickList;
 
   const { data } = list;
+
+  // TODO: line clamp is not working on KaiOS 2.5
 </script>
 
 <ListHeader title={data.date} />
