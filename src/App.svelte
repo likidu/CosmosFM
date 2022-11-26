@@ -52,7 +52,6 @@
     <Audio />
   {/if}
   <AppMenu slot="app-menu" />
-  <AppMenu slot="app-menu" />
   <QueryClientProvider client={queryClient}>
     <Router {routes} />
   </QueryClientProvider>
