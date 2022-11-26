@@ -8,6 +8,7 @@
 
   import AppMenu from '@/lib/components/AppMenu.svelte';
   import Audio from '@/lib/components/Audio.svelte';
+  import StripShade from '@/lib/components/StripShade.svelte';
   import { player } from '@/lib/stores/player';
 
   import {
@@ -70,4 +71,5 @@
   <QueryClientProvider client={queryClient}>
     <Router {routes} />
   </QueryClientProvider>
+  <StripShade />
 </OnyxApp>

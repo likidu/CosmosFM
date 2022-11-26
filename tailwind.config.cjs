@@ -1,3 +1,6 @@
+const lineClamp = require('@tailwindcss/line-clamp');
+const gradients = require('tailwindcss-gradients');
+
 module.exports = {
   mode: 'jit',
   content: ['./index.html', './src/**/*.{svelte,js,ts}'],
@@ -37,8 +40,18 @@ module.exports = {
       transformOrigin: {
         '1/2': '50%',
       },
+      linearGradientColors: {
+        'gray-cover': ['rgba(229, 231, 235) 0%', 'white 20%', 'white 100%'],
+        'gray-strip': ['rgb(156, 163, 175)', 'rgb(156, 163, 175) 2px', 'white 2px', 'white'],
+      },
+      repeatingLinearGradientDirections: (theme) => theme('linearGradientDirections'), // defaults to this value
+      repeatingLinearGradientColors: (theme) => theme('linearGradientColors'), // defaults to {}
+      repeatingLinearGradientLengths: {
+        '5px': '5px',
+        sm: '2px',
+      },
     },
     variants: {},
-    plugins: [require('@tailwindcss/line-clamp')],
+    plugins: [lineClamp, gradients],
   },
 };

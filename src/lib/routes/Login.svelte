@@ -11,7 +11,7 @@
   import { Onyx } from '@/ui/services';
   import { delay } from '@/ui/utils';
 
-  import CosmosLogo from '@/assets/cosmos.webp';
+  import CosmosLogo from '@/assets/cosmos.png';
 
   import type { AuthError, User } from '@/lib/models';
   import { PhoneArea } from '@/lib/models';
