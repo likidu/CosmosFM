@@ -1,11 +1,13 @@
 <script lang="ts">
   import { push } from 'svelte-spa-router';
 
+  import Icon from '@/ui/components/icon/Icon.svelte';
   import ListItem from '@/ui/components/list/ListItem.svelte';
   import NavGroup from '@/ui/components/nav/NavGroup.svelte';
   import { Onyx } from '@/ui/services';
   import { getShortcutFromIndex } from '@/ui/utils/getShortcutFromIndex';
 
+  import { user } from '@/lib/stores/user';
   import { IconDiscover, IconInbox, IconPlayer, IconSearch, IconUser } from '@/ui/icons';
 
   type MenuItem = {
@@ -24,7 +26,15 @@
 </script>
 
 <NavGroup groupId="app-menu">
-  <div class="header">Cosmos.FM</div>
+  <div class="header">
+    <div class="flex items-center">
+      <Icon><IconDiscover /></Icon>
+      <strong class="text-sm">Cosmos.FM</strong>
+    </div>
+    {#if $user}
+      <img src={$user.avatar.picture.thumbnailUrl} class="rounded-full w-8 h-8" alt="CosmosFM" />
+    {/if}
+  </div>
   <div class="scroller" data-nav-scroller>
     {#each menuItems as item, i}
       <ListItem
@@ -46,7 +56,7 @@
   </div>
 </NavGroup>
 
-<style>
+<style lang="postcss" type="text/postcss">
   :global([data-onyx-group-id='app-menu']) {
     border-radius: var(--radius) var(--radius) 0 0;
     background-color: var(--card-color);
@@ -56,10 +66,7 @@
     height: 100%;
   }
   .header {
-    padding: 5px;
-    font-weight: var(--bold-font-weight);
-    color: var(--accent-color);
-    text-align: center;
+    @apply flex items-center justify-between p-4 text-accent;
   }
   .scroller {
     overflow-y: auto;
