@@ -1,4 +1,7 @@
 export * from './Auth';
+export * from './Episode';
+export * from './Comment';
+export * from './Discovery';
 export * from './General';
 export * from './Media';
 export * from './Menu';

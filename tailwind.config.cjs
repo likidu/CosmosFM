@@ -1,5 +1,3 @@
-const lineClamp = require('@tailwindcss/line-clamp');
-
 module.exports = {
   mode: 'jit',
   content: ['./index.html', './src/**/*.{svelte,js,ts}'],
@@ -35,6 +33,6 @@ module.exports = {
       },
     },
     variants: {},
-    plugins: [lineClamp],
+    plugins: [require('@tailwindcss/line-clamp')],
   },
 };

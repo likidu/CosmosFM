@@ -1,5 +1,6 @@
 <script lang="ts">
   import Router, { location, replace, pop } from 'svelte-spa-router';
+  import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
 
   import { OnyxKeys } from 'onyx-keys';
   import { Onyx } from '@/ui/services';
@@ -10,6 +11,8 @@
   import { Login, Discovery, User, NotFound } from '@/lib/routes';
   import { settings } from '@/lib/stores/settings';
   import { user } from '@/lib/stores/user';
+
+  const queryClient = new QueryClient();
 
   const routes = {
     '/': Discovery,
@@ -40,5 +43,7 @@
 
 <OnyxApp>
   <AppMenu slot="app-menu" />
-  <Router {routes} />
+  <QueryClientProvider client={queryClient}>
+    <Router {routes} />
+  </QueryClientProvider>
 </OnyxApp>
