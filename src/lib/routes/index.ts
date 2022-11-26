@@ -1,3 +1,4 @@
+export { default as Discovery } from './Discovery.svelte';
 export { default as Login } from './Login.svelte';
 export { default as Home } from './Home.svelte';
 export { default as User } from './User.svelte';

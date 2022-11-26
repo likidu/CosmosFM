@@ -7,11 +7,12 @@
 
   import AppMenu from '@/lib/components/AppMenu.svelte';
 
-  import { Login, Home, User, NotFound } from '@/lib/routes';
+  import { Login, Discovery, User, NotFound } from '@/lib/routes';
   import { settings } from '@/lib/stores/settings';
+  import { user } from '@/lib/stores/user';
 
   const routes = {
-    '/': Home,
+    '/': Discovery,
     '/login': Login,
     '/user': User,
     '*': NotFound,
@@ -33,6 +34,8 @@
   );
 
   $: Onyx.settings.update($settings);
+
+  $: if (!$user) replace('/login');
 </script>
 
 <OnyxApp>

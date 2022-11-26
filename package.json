@@ -1,7 +1,6 @@
 {
-  "name": "kaios-app-template",
-  "private": true,
-  "version": "0.1.0",
+  "name": "cosmosfm",
+  "version": "0.3.0",
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development vite",
@@ -17,6 +16,7 @@
     "@babel/preset-env": "^7.20.2",
     "@rollup/plugin-babel": "^6.0.2",
     "@sveltejs/vite-plugin-svelte": "^1.3.1",
+    "@sveltestack/svelte-query": "^1.6.0",
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tsconfig/svelte": "^3.0.0",
     "autoprefixer": "^10.4.13",
