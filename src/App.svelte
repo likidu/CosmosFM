@@ -1,14 +1,14 @@
 <script lang="ts">
-  import Router, { location, replace, pop } from 'svelte-spa-router';
   import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
+  import Router, { location, pop, replace } from 'svelte-spa-router';
 
-  import { OnyxKeys } from 'onyx-keys';
-  import { Onyx } from '@/ui/services';
   import OnyxApp from '@/ui/components/app/OnyxApp.svelte';
+  import { Onyx } from '@/ui/services';
+  import { OnyxKeys } from 'onyx-keys';
 
   import AppMenu from '@/lib/components/AppMenu.svelte';
 
-  import { Login, Discovery, User, NotFound } from '@/lib/routes';
+  import { Discovery, Episode, Login, NotFound, Player, User } from '@/lib/routes';
   import { settings } from '@/lib/stores/settings';
   import { user } from '@/lib/stores/user';
 
@@ -17,6 +17,8 @@
   const routes = {
     '/': Discovery,
     '/login': Login,
+    '/episode/:eid': Episode,
+    '/player': Player,
     '/user': User,
     '*': NotFound,
   };
