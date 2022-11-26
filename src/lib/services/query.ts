@@ -5,7 +5,14 @@ import { useInfiniteQuery, useQuery } from '@sveltestack/svelte-query';
 
 import { client } from '@/lib/services';
 
-import type { CommentList, CommentListRequest, CommentLoadMoreKey, DiscoveryList, Episode } from '@/lib/models';
+import type {
+  CommentList,
+  CommentListRequest,
+  CommentLoadMoreKey,
+  DiscoveryList,
+  Episode,
+  UserStats,
+} from '@/lib/models';
 
 /**
  * Discovery list
@@ -58,3 +65,15 @@ export const useCommentList = (eid: string) =>
     },
     retry: false,
   });
+
+/**
+ * User stats
+ * @param uid
+ * @returns UserStats
+ */
+const userStats = async (uid: string): Promise<UserStats> => {
+  const { data } = await client.get(`/user-stats/get?uid=${uid}`);
+  return data.data;
+};
+
+export const useUserStats = (uid: string) => useQuery('user-stats', () => userStats(uid));
