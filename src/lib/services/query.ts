@@ -11,7 +11,11 @@ import type {
   CommentLoadMoreKey,
   DiscoveryList,
   Episode,
+  EpisodeList,
   InboxList,
+  Podcast,
+  SearchPreset,
+  SearchResultList,
   UserStats,
 } from '@/lib/models';
 
@@ -45,6 +49,18 @@ export const useEpisode = (eid: string) =>
   useQuery(['episode', eid], () => episode(eid), { enabled: !!eid, refetchOnWindowFocus: false });
 
 /**
+ * Individual Podcast
+ * @param pid
+ * @returns Podcast
+ */
+const podcast = async (pid: string): Promise<Podcast> => {
+  const { data } = await client.get(`/podcast/get?pid=${pid}`);
+  return data.data;
+};
+
+export const usePodcast = (pid: string) => useQuery(['podcast', pid], () => podcast(pid));
+
+/**
  * Comment list
  * @param eid
  * @param pageParam
@@ -57,6 +73,19 @@ const commentList = async (eid: string, pageParam: CommentLoadMoreKey): Promise<
   const { data } = await client.post('/comment/list-primary', request);
   return data;
 };
+
+/**
+ * Episode List
+ * @param pid
+ * @param limit
+ * @returns EpisodeList
+ */
+const episodeList = async (pid: string, limit = 15): Promise<EpisodeList> => {
+  const { data } = await client.post('/episode/list', { pid, limit });
+  return data;
+};
+
+export const useEpisodeList = (pid: string) => useQuery('episode-list', () => episodeList(pid));
 
 // {querykey, pageParam} are what pass to the queryFn
 export const useCommentList = (eid: string) =>
@@ -78,6 +107,30 @@ const inboxList = async (limit = 10): Promise<InboxList> => {
 };
 
 export const useInboxList = () => useQuery('inbox-list', () => inboxList());
+
+/**
+ * Search
+ * @returns SearchPreset[]
+ */
+const searchPreset = async (): Promise<SearchPreset[]> => {
+  const { data } = await client.get('/search/get-preset');
+  return data.data;
+};
+
+export const useSearchPreset = () => useQuery('search-preset', () => searchPreset());
+
+/**
+ * Search result list
+ * @param keyword
+ * @returns SearchResultList
+ */
+const searchResultList = async (keyword: string): Promise<SearchResultList> => {
+  const request = { keyword, limit: 20, type: 'ALL' };
+  const { data } = await client.post('search/create', request);
+  return data;
+};
+
+export const useSearchResultList = (keyword: string) => useQuery('search-result', () => searchResultList(keyword));
 
 /**
  * User stats

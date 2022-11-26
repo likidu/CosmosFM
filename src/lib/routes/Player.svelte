@@ -92,8 +92,9 @@
 
 <View>
   {#if !$player.eid}
+    <ViewHeader title="Player" />
     <ViewContent>
-      <Typography align="center">Error!</Typography>
+      <Typography align="center">Nothing is playing...</Typography>
     </ViewContent>
   {:else if $episode.status === 'loading'}
     <Typography align="center">Loading...</Typography>

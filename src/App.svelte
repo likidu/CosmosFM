@@ -10,7 +10,19 @@
   import Audio from '@/lib/components/Audio.svelte';
   import { player } from '@/lib/stores/player';
 
-  import { Comment, Discovery, Episode, Inbox, Login, NotFound, Player, User } from '@/lib/routes';
+  import {
+    Comment,
+    Discovery,
+    Episode,
+    Inbox,
+    Login,
+    NotFound,
+    Player,
+    Podcast,
+    Search,
+    SearchResult,
+    User,
+  } from '@/lib/routes';
   import { settings } from '@/lib/stores/settings';
   import { user } from '@/lib/stores/user';
 
@@ -21,7 +33,10 @@
     '/login': Login,
     '/inbox': Inbox,
     '/episode/:eid': Episode,
+    '/podcast/:pid': Podcast,
     '/player': Player,
+    '/search/': Search,
+    '/search/:keyword': SearchResult,
     '/user': User,
     '/comment/:eid': Comment,
     '*': NotFound,

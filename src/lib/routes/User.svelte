@@ -107,7 +107,6 @@
   .user-stats {
     @apply px-3;
   }
-
   .user-stats-header {
     @apply flex justify-between;
   }
@@ -117,7 +116,6 @@
   .user-stats-header figure span {
     @apply inline text-sm text-secondary;
   }
-
   .user-stats-numbers {
     @apply flex justify-between space-x-2 mt-3;
   }
