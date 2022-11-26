@@ -1,22 +1,22 @@
 <script lang="ts">
   import { querystring, replace } from 'svelte-spa-router';
 
-  import View from '@/ui/components/view/View.svelte';
-  import ViewContent from '@/ui/components/view/ViewContent.svelte';
-  import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
   import Button from '@/ui/components/buttons/Button.svelte';
   import InputRow from '@/ui/components/form/InputRow.svelte';
   import SelectRow from '@/ui/components/form/SelectRow.svelte';
   import Typography from '@/ui/components/Typography.svelte';
+  import View from '@/ui/components/view/View.svelte';
+  import ViewContent from '@/ui/components/view/ViewContent.svelte';
+  import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
   import { Onyx } from '@/ui/services';
   import { delay } from '@/ui/utils';
 
-  import svelteLogo from '@/assets/svelte.svg';
+  import CosmosLogo from '@/assets/cosmos.webp';
 
+  import type { AuthError, User } from '@/lib/models';
+  import { PhoneArea } from '@/lib/models';
   import { Cosmos } from '@/lib/services';
   import { user } from '@/lib/stores/user';
-  import { PhoneArea } from '@/lib/models';
-  import type { AuthError, User } from '@/lib/models';
 
   let params: URLSearchParams;
 
@@ -127,7 +127,7 @@
     {#if !params.get('step')}
       <div class="flex flex-col items-center justify-center">
         <h2>Cosmos.FM</h2>
-        <img src={svelteLogo} class="w-32 h-32" alt="Svelte Logo" />
+        <img src={CosmosLogo} class="inline-box rounded-full h-48 w-48" alt="Cosmos.FM Logo" />
       </div>
       <Button
         title="Login with SMS"

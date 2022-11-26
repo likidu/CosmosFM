@@ -31,6 +31,12 @@ module.exports = {
         card: 'var(--card-color)',
         'card-border': 'var(--card-border-color)',
       },
+      rotate: {
+        52: '52deg',
+      },
+      transformOrigin: {
+        '1/2': '50%',
+      },
     },
     variants: {},
     plugins: [require('@tailwindcss/line-clamp')],

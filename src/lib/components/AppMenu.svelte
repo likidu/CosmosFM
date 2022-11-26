@@ -4,11 +4,12 @@
   import Icon from '@/ui/components/icon/Icon.svelte';
   import ListItem from '@/ui/components/list/ListItem.svelte';
   import NavGroup from '@/ui/components/nav/NavGroup.svelte';
+  import { IconDiscover, IconInbox, IconPlayer, IconSearch, IconUser } from '@/ui/icons';
   import { Onyx } from '@/ui/services';
   import { getShortcutFromIndex } from '@/ui/utils/getShortcutFromIndex';
 
+  import { IconCosmos } from '@/assets/icons';
   import { user } from '@/lib/stores/user';
-  import { IconDiscover, IconInbox, IconPlayer, IconSearch, IconUser } from '@/ui/icons';
 
   type MenuItem = {
     id: string;
@@ -28,7 +29,7 @@
 <NavGroup groupId="app-menu">
   <div class="header">
     <div class="flex items-center">
-      <Icon><IconDiscover /></Icon>
+      <Icon><IconCosmos /></Icon>
       <strong class="text-sm">Cosmos.FM</strong>
     </div>
     {#if $user}
