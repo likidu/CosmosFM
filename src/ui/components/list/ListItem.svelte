@@ -1,7 +1,7 @@
 <script lang="ts">
-  import type { SvelteComponent } from 'svelte';
   import IconDotsVertical from '@/ui/icons/IconDotsVertical.svelte';
-  import { Color, IconSize } from '../../enums';
+  import type { SvelteComponent } from 'svelte';
+  import { Alignment, Color, IconSize } from '../../enums';
   import type { ContextMenu, Navigation } from '../../models';
   import { settings } from '../../stores';
   import Icon from '../icon/Icon.svelte';
@@ -12,6 +12,7 @@
   export let imageSize: IconSize = IconSize.Medium;
   export let icon: typeof SvelteComponent = null;
   export let iconColor: Color = Color.Primary;
+  export let align: Alignment = Alignment.Left;
   export let primaryText: string = null;
   export let secondaryText: string = null;
   export let accentText: string = null;
@@ -20,7 +21,7 @@
 </script>
 
 <NavItem {navi} {contextMenu}>
-  <div class="root">
+  <div class="root" style={`align-items: ${align}`}>
     {#if $settings.shortcutKeyLocation === 'left' && navi.shortcutKey}
       <div class="shortcut">{navi.shortcutKey}</div>
     {/if}
@@ -39,7 +40,11 @@
       />
     {/if}
     <div class="container">
-      <div class="primary">{primaryText}</div>
+      {#if primaryText}
+        <div class="primary">{primaryText}</div>
+      {:else}
+        <slot name="primaryText" />
+      {/if}
       {#if secondaryText}
         <div class="secondary">{secondaryText}</div>
       {/if}
