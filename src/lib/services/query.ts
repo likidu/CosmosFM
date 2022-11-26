@@ -11,6 +11,7 @@ import type {
   CommentLoadMoreKey,
   DiscoveryList,
   Episode,
+  InboxList,
   UserStats,
 } from '@/lib/models';
 
@@ -65,6 +66,18 @@ export const useCommentList = (eid: string) =>
     },
     retry: false,
   });
+
+/**
+ * Inbox list
+ * @param limit
+ * @returns InboxList
+ */
+const inboxList = async (limit = 10): Promise<InboxList> => {
+  const { data } = await client.post('/inbox/list', { limit });
+  return data;
+};
+
+export const useInboxList = () => useQuery('inbox-list', () => inboxList());
 
 /**
  * User stats

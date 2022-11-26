@@ -7,8 +7,10 @@
   import { OnyxKeys } from 'onyx-keys';
 
   import AppMenu from '@/lib/components/AppMenu.svelte';
+  import Audio from '@/lib/components/Audio.svelte';
+  import { player } from '@/lib/stores/player';
 
-  import { Comment, Discovery, Episode, Login, NotFound, Player, User } from '@/lib/routes';
+  import { Comment, Discovery, Episode, Inbox, Login, NotFound, Player, User } from '@/lib/routes';
   import { settings } from '@/lib/stores/settings';
   import { user } from '@/lib/stores/user';
 
@@ -17,6 +19,7 @@
   const routes = {
     '/': Discovery,
     '/login': Login,
+    '/inbox': Inbox,
     '/episode/:eid': Episode,
     '/player': Player,
     '/user': User,
@@ -45,6 +48,10 @@
 </script>
 
 <OnyxApp>
+  {#if $user && $player.eid}
+    <Audio />
+  {/if}
+  <AppMenu slot="app-menu" />
   <AppMenu slot="app-menu" />
   <QueryClientProvider client={queryClient}>
     <Router {routes} />
