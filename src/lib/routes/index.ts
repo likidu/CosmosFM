@@ -1,3 +1,4 @@
+export { default as Comment } from './Comment.svelte';
 export { default as Discovery } from './Discovery.svelte';
 export { default as Episode } from './Episode.svelte';
 export { default as Home } from './Home.svelte';

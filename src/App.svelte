@@ -8,7 +8,7 @@
 
   import AppMenu from '@/lib/components/AppMenu.svelte';
 
-  import { Discovery, Episode, Login, NotFound, Player, User } from '@/lib/routes';
+  import { Comment, Discovery, Episode, Login, NotFound, Player, User } from '@/lib/routes';
   import { settings } from '@/lib/stores/settings';
   import { user } from '@/lib/stores/user';
 
@@ -20,6 +20,7 @@
     '/episode/:eid': Episode,
     '/player': Player,
     '/user': User,
+    '/comment/:eid': Comment,
     '*': NotFound,
   };
 
