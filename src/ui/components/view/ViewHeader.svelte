@@ -5,7 +5,7 @@
 </script>
 
 <div class="flex items-center overflow-hidden whitespace-nowrap px-1 py-0.5" style={css}>
-  <h1 class="flex-auto text-center overflow-hidden text-ellipsis px-3">
+  <h2 class="flex-auto text-center overflow-hidden text-ellipsis px-3 font-bold">
     {title}
-  </h1>
+  </h2>
 </div>

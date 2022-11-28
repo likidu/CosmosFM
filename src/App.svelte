@@ -1,19 +1,45 @@
 <script lang="ts">
-  import Router, { location, replace, pop } from 'svelte-spa-router';
+  import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
+  import Router, { location, pop, replace } from 'svelte-spa-router';
 
-  import { OnyxKeys } from 'onyx-keys';
-  import { Onyx } from '@/ui/services';
   import OnyxApp from '@/ui/components/app/OnyxApp.svelte';
+  import { Onyx } from '@/ui/services';
+  import { OnyxKeys } from 'onyx-keys';
 
   import AppMenu from '@/lib/components/AppMenu.svelte';
+  import Audio from '@/lib/components/Audio.svelte';
+  import StripShade from '@/lib/components/StripShade.svelte';
+  import { player } from '@/lib/stores/player';
 
-  import { Login, Home, User, NotFound } from '@/lib/routes';
+  import {
+    Comment,
+    Discovery,
+    Episode,
+    Inbox,
+    Login,
+    NotFound,
+    Player,
+    Podcast,
+    Search,
+    SearchResult,
+    User,
+  } from '@/lib/routes';
   import { settings } from '@/lib/stores/settings';
+  import { user } from '@/lib/stores/user';
+
+  const queryClient = new QueryClient();
 
   const routes = {
-    '/': Home,
+    '/': Discovery,
     '/login': Login,
+    '/inbox': Inbox,
+    '/episode/:eid': Episode,
+    '/podcast/:pid': Podcast,
+    '/player': Player,
+    '/search/': Search,
+    '/search/:keyword': SearchResult,
     '/user': User,
+    '/comment/:eid': Comment,
     '*': NotFound,
   };
 
@@ -33,9 +59,17 @@
   );
 
   $: Onyx.settings.update($settings);
+
+  $: if (!$user) replace('/login');
 </script>
 
 <OnyxApp>
+  {#if $user && $player.eid}
+    <Audio />
+  {/if}
   <AppMenu slot="app-menu" />
-  <Router {routes} />
+  <QueryClientProvider client={queryClient}>
+    <Router {routes} />
+  </QueryClientProvider>
+  <StripShade />
 </OnyxApp>

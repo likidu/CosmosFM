@@ -1,12 +1,16 @@
 <script lang="ts">
   import { push } from 'svelte-spa-router';
 
+  import Icon from '@/ui/components/icon/Icon.svelte';
   import ListItem from '@/ui/components/list/ListItem.svelte';
   import NavGroup from '@/ui/components/nav/NavGroup.svelte';
+  import { IconSize } from '@/ui/enums';
+  import { IconDiscover, IconInbox, IconPlayer, IconSearch, IconUser } from '@/ui/icons';
   import { Onyx } from '@/ui/services';
   import { getShortcutFromIndex } from '@/ui/utils/getShortcutFromIndex';
 
-  import { IconDiscover, IconUser } from '@/ui/icons';
+  import { IconCosmos } from '@/assets/icons';
+  import { user } from '@/lib/stores/user';
 
   type MenuItem = {
     id: string;
@@ -15,18 +19,29 @@
     icon: any | null;
   };
   const menuItems: MenuItem[] = [
-    { id: 'home', text: 'Home', route: '#/', icon: IconDiscover },
+    { id: 'discovery', text: 'Discovery', route: '#/', icon: IconDiscover },
+    { id: 'inbox', text: 'Inbox', route: '/inbox', icon: IconInbox },
+    { id: 'search', text: 'Search', route: '/search', icon: IconSearch },
+    { id: 'player', text: 'Player', route: '/player', icon: IconPlayer },
     { id: 'user', text: 'User', route: '/user', icon: IconUser },
-    { id: 'login', text: 'Login', route: '/login', icon: IconUser },
   ];
 </script>
 
 <NavGroup groupId="app-menu">
-  <div class="header">OnyxUI Demo</div>
+  <div class="header">
+    <div class="flex items-center">
+      <Icon><IconCosmos /></Icon>
+      <strong class="text-sm">Cosmos.FM</strong>
+    </div>
+    {#if $user}
+      <img src={$user.avatar.picture.thumbnailUrl} class="rounded-full w-8 h-8" alt="CosmosFM" />
+    {/if}
+  </div>
   <div class="scroller" data-nav-scroller>
     {#each menuItems as item, i}
       <ListItem
         icon={item.icon}
+        imageSize={IconSize.Small}
         primaryText={item.text}
         navi={{
           itemId: item.id,
@@ -44,7 +59,7 @@
   </div>
 </NavGroup>
 
-<style>
+<style lang="postcss">
   :global([data-onyx-group-id='app-menu']) {
     border-radius: var(--radius) var(--radius) 0 0;
     background-color: var(--card-color);
@@ -54,10 +69,7 @@
     height: 100%;
   }
   .header {
-    padding: 5px;
-    font-weight: var(--bold-font-weight);
-    color: var(--accent-color);
-    text-align: center;
+    @apply flex items-center justify-between p-4 text-accent;
   }
   .scroller {
     overflow-y: auto;

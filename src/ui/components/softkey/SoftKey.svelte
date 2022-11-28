@@ -2,7 +2,7 @@
   <slot />
 </footer>
 
-<style global lang="postcss" type="text/postcss">
+<style global lang="postcss">
   .softkey {
     @apply flex items-center;
   }

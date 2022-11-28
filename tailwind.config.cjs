@@ -1,4 +1,5 @@
 const lineClamp = require('@tailwindcss/line-clamp');
+const gradients = require('tailwindcss-gradients');
 
 module.exports = {
   mode: 'jit',
@@ -20,6 +21,7 @@ module.exports = {
       fontSize: {
         sm: '1.2rem',
         base: '1.4rem',
+        lg: '1.6rem',
       },
       fontWeight: {
         bold: 'var(--bold-font-weight)',
@@ -33,8 +35,24 @@ module.exports = {
         card: 'var(--card-color)',
         'card-border': 'var(--card-border-color)',
       },
+      rotate: {
+        52: '52deg',
+      },
+      transformOrigin: {
+        '1/2': '50%',
+      },
+      linearGradientColors: {
+        'gray-cover': ['rgba(229, 231, 235) 0%', 'white 20%', 'white 100%'],
+        'gray-strip': ['rgb(156, 163, 175)', 'rgb(156, 163, 175) 2px', 'white 2px', 'white'],
+      },
+      repeatingLinearGradientDirections: (theme) => theme('linearGradientDirections'), // defaults to this value
+      repeatingLinearGradientColors: (theme) => theme('linearGradientColors'), // defaults to {}
+      repeatingLinearGradientLengths: {
+        '5px': '5px',
+        sm: '2px',
+      },
     },
     variants: {},
-    plugins: [lineClamp],
+    plugins: [lineClamp, gradients],
   },
 };

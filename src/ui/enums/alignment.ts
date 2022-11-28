@@ -1,6 +1,5 @@
 export enum Alignment {
-  Left = 'flex-start',
+  Top = 'flex-start',
   Middle = 'center',
-  Right = 'flex-end',
-  Between = 'space-between',
+  Bottom = 'flex-end',
 }
