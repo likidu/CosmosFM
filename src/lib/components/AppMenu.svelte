@@ -4,6 +4,7 @@
   import Icon from '@/ui/components/icon/Icon.svelte';
   import ListItem from '@/ui/components/list/ListItem.svelte';
   import NavGroup from '@/ui/components/nav/NavGroup.svelte';
+  import { IconSize } from '@/ui/enums';
   import { IconDiscover, IconInbox, IconPlayer, IconSearch, IconUser } from '@/ui/icons';
   import { Onyx } from '@/ui/services';
   import { getShortcutFromIndex } from '@/ui/utils/getShortcutFromIndex';
@@ -40,6 +41,7 @@
     {#each menuItems as item, i}
       <ListItem
         icon={item.icon}
+        imageSize={IconSize.Small}
         primaryText={item.text}
         navi={{
           itemId: item.id,
@@ -57,7 +59,7 @@
   </div>
 </NavGroup>
 
-<style lang="postcss" type="text/postcss">
+<style lang="postcss">
   :global([data-onyx-group-id='app-menu']) {
     border-radius: var(--radius) var(--radius) 0 0;
     background-color: var(--card-color);

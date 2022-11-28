@@ -43,7 +43,7 @@
   >
 </IconBase>
 
-<style lang="postcss" type="text/postcss">
+<style lang="postcss">
   .progress-ring__circle {
     @apply origin-1/2 rotate-52;
   }

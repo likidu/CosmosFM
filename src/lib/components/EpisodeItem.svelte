@@ -5,7 +5,7 @@
 
   import Icon from '@/ui/components/icon/Icon.svelte';
   import ListItem from '@/ui/components/list/ListItem.svelte';
-  import { Color, IconSize } from '@/ui/enums';
+  import { Alignment, Color, IconSize } from '@/ui/enums';
   import { IconComment, IconHeadphone } from '@/ui/icons';
 
   import type { Episode } from '@/lib/models';
@@ -32,6 +32,7 @@
 
   <ListItem
     imageUrl={url ?? placeholderImage}
+    align={Alignment.Top}
     secondaryText={episode.description}
     navi={{ itemId: `${episode.type}_${idx + 1}`, onSelect: () => push(`/episode/${episode.eid}`) }}
   >
@@ -58,7 +59,7 @@
   </ListItem>
 {/if}
 
-<style lang="postcss" type="text/postcss">
+<style lang="postcss">
   .stats {
     color: var(--secondary-text-color);
     @apply flex space-x-6 mt-1;

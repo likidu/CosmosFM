@@ -33,6 +33,7 @@
   export let params: { eid: string };
 
   let eid: string;
+  let hasComment = true;
 
   const episode = useEpisode(params.eid);
 
@@ -53,7 +54,7 @@
         push('/player');
       },
       onSoftRight: async () => {
-        push(`/comment/${eid}`);
+        if (hasComment) push(`/comment/${eid}`);
       },
     },
     { priority: 3 },
@@ -61,6 +62,10 @@
 
   // Ensure episode data is loaded
   $: eid = $episode.data?.eid;
+
+  $: if (eid) {
+    hasComment = !!($episode.data.commentCount > 0);
+  }
 
   // Prevent keyManager from working when the episode data is not loaded yet
   $: {
@@ -83,7 +88,7 @@
     <ViewHeader title={episode.podcast.title} style={`color: ${podcastColor}`} />
     <ViewContent>
       <div class="episode-content">
-        <img src={episode.podcast.image.thumbnailUrl} alt="Podcast Cover" class="rounded-sm" width="48" />
+        <img src={episode.podcast.image.thumbnailUrl} alt="Podcast Cover" class="rounded-sm w-20 h-20" />
         <h1>{episode.title}</h1>
         <NavItem
           navi={{
@@ -99,7 +104,7 @@
           </div>
         </NavItem>
         <!-- Wrap below in NavItem just for the focus move away from the podcast link -->
-        <NavItem navi={{ itemId: 'episode-section-2' }}>
+        <NavItem navi={{ itemId: 'episode-section-2' }} focusable={false}>
           <div class="flex space-x-2 text-secondary mb-4">
             <span>{time[0] ? `${time[0]}hrs` : ''} {`${time[1]}mins`}</span>
             <span>/</span>
@@ -112,17 +117,19 @@
     <ViewFooter>
       <SoftKey>
         <div><Icon size={IconSize.Small} color={podcastColor}><IconMenu /></Icon></div>
-        <div>Play</div>
+        <div style={`color: ${podcastColor}`}>Play</div>
         <div class="flex items-center">
-          <Icon size={IconSize.Small} color={podcastColor}><IconComment /></Icon>
-          <span class="text-sm">{episode.commentCount}</span>
+          <Icon size={IconSize.Small} color={podcastColor} disabled={!hasComment}><IconComment /></Icon>
+          {#if hasComment}
+            <span class="text-sm" style={`color: ${podcastColor}`}>{episode.commentCount}</span>
+          {/if}
         </div>
       </SoftKey>
     </ViewFooter>
   {/if}
 </View>
 
-<style global lang="postcss" type="text/postcss">
+<style global lang="postcss">
   .episode-content {
     @apply px-2;
   }

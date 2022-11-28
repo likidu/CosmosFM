@@ -3,15 +3,15 @@ import { writable } from 'svelte/store';
 import { Animations, Density, TextSize, TextWeight } from '@/ui/enums';
 import { Storage } from '@/ui/services';
 
-import type { Settings } from '@/lib/models';
 import { themes } from '@/lib/configs/themes';
+import type { Settings } from '@/lib/models';
 
 const defaultSettings: Partial<Settings> = {
   themeId: themes[2].id,
   textSize: TextSize.Medium,
   textWeight: TextWeight.Medium,
   displayDensity: Density.Normal,
-  borderRadius: 14,
+  borderRadius: 0,
   animationSpeed: Animations.Normal,
   showHelpText: true,
   // Shortcuts

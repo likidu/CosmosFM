@@ -13,7 +13,7 @@
   import { dayjs } from 'svelte-time';
 
   import { useCommentList } from '@/lib/services';
-  import { IconInfo, IconMenu } from '@/ui/icons';
+  import { IconMenu, IconPencil } from '@/ui/icons';
 
   export let params: { eid: string };
 
@@ -77,7 +77,7 @@
       <SoftKey>
         <div><Icon size={IconSize.Small}><IconMenu /></Icon></div>
         <div>
-          <Icon size={IconSize.Small}><IconInfo /></Icon>
+          <Icon size={IconSize.Small}><IconPencil /></Icon>
         </div>
       </SoftKey>
     </ViewFooter>

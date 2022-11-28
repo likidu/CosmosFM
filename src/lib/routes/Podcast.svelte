@@ -10,7 +10,7 @@
   import Typography from '@/ui/components/Typography.svelte';
   import View from '@/ui/components/view/View.svelte';
   import ViewContent from '@/ui/components/view/ViewContent.svelte';
-  import { IconSize } from '@/ui/enums';
+  import { Alignment, IconSize } from '@/ui/enums';
   import { IconMenu, IconPodcast, IconSubscribeAdd, IconSubscribeRemove } from '@/ui/icons';
   import { Onyx } from '@/ui/services';
 
@@ -102,6 +102,7 @@
         {#each list.data as episode, i}
           <ListItem
             icon={IconPodcast}
+            align={Alignment.Top}
             primaryText={episode.title}
             navi={{ itemId: `EPISODE_${i + 1}`, onSelect: () => push(`/episode/${episode.eid}`) }}
           >

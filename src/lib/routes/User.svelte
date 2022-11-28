@@ -2,16 +2,12 @@
   import { replace } from 'svelte-spa-router';
 
   import Button from '@/ui/components/buttons/Button.svelte';
-  import Icon from '@/ui/components/icon/Icon.svelte';
   import ListItem from '@/ui/components/list/ListItem.svelte';
-  import SoftKey from '@/ui/components/softkey/SoftKey.svelte';
   import Typography from '@/ui/components/Typography.svelte';
   import View from '@/ui/components/view/View.svelte';
   import ViewContent from '@/ui/components/view/ViewContent.svelte';
-  import ViewFooter from '@/ui/components/view/ViewFooter.svelte';
   import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
-  import { Color, IconSize } from '@/ui/enums';
-  import { IconInfo, IconMenu } from '@/ui/icons';
+  import { Color } from '@/ui/enums';
   import { getShortcutFromIndex } from '@/ui/utils/getShortcutFromIndex';
 
   import { stop } from '@/lib/components/Audio.svelte';
@@ -93,17 +89,9 @@
       }}
     />
   </ViewContent>
-  <ViewFooter>
-    <SoftKey>
-      <div><Icon size={IconSize.Small}><IconMenu /></Icon></div>
-      <div>
-        <Icon size={IconSize.Small}><IconInfo /></Icon>
-      </div>
-    </SoftKey>
-  </ViewFooter>
 </View>
 
-<style lang="postcss" type="text/postcss">
+<style lang="postcss">
   .user-stats {
     @apply px-3;
   }

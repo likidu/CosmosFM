@@ -24,6 +24,7 @@
   let eid: string;
   let progress = 0;
   let buffered = 0;
+  let hasComment = true;
 
   const imageSize = 144;
 
@@ -73,9 +74,13 @@
   // Ensure episode data is loaded
   $: eid = $episode.data?.eid;
 
+  // Load this episode if it's not from the saved Storage
   $: if (eid && src() === '') {
-    // Load this episode.
     reload($episode.data.mediaKey, $player.progress);
+  }
+
+  $: if (eid) {
+    hasComment = !!($episode.data.commentCount > 0);
   }
 
   // Set progress bar percent and reserve 3 fraction values (100,000 / 1,000).
@@ -102,7 +107,8 @@
     <Typography align="center">Error!</Typography>
   {:else}
     {@const episode = $episode.data}
-    <ViewHeader title={episode.podcast.title} style={`color: ${episode.podcast.color.light}`} />
+    {@const podcastColor = episode.podcast.color.light}
+    <ViewHeader title={episode.podcast.title} style={`color: ${podcastColor}`} />
     <ViewContent>
       <div class="player-content">
         {#if episode.image}
@@ -110,7 +116,7 @@
         {:else}
           <img src={episode.podcast.image.smallPicUrl} alt="Podcast Cover" width={imageSize} />
         {/if}
-        <h2 class="line-clamp-2">{episode.title}</h2>
+        <h1 class="line-clamp-2">{episode.title}</h1>
       </div>
     </ViewContent>
     <ViewFooter>
@@ -120,23 +126,28 @@
       </div>
       <Progressbar value={progress} shade={buffered} />
       <SoftKey>
-        <div><Icon size={IconSize.Small}><IconInfo /></Icon></div>
+        <div><Icon size={IconSize.Small} color={podcastColor}><IconInfo /></Icon></div>
         <div class="player-controller">
-          <Icon size={IconSize.Small}><IconBackward /></Icon>
+          <Icon size={IconSize.Small} color={podcastColor}><IconBackward /></Icon>
           {#if $player.playing}
-            <Icon size={IconSize.Large}><IconPause /></Icon>
+            <Icon size={IconSize.Large} color={podcastColor}><IconPause /></Icon>
           {:else}
-            <Icon size={IconSize.Large}><IconPlay /></Icon>
+            <Icon size={IconSize.Large} color={podcastColor}><IconPlay /></Icon>
           {/if}
-          <Icon size={IconSize.Small}><IconForward /></Icon>
+          <Icon size={IconSize.Small} color={podcastColor}><IconForward /></Icon>
         </div>
-        <div><Icon size={IconSize.Small}><IconComment /></Icon></div>
+        <div class="flex items-center">
+          <Icon size={IconSize.Small} color={podcastColor} disabled={!hasComment}><IconComment /></Icon>
+          {#if hasComment}
+            <span class="text-sm" style={`color: ${podcastColor}`}>{episode.commentCount}</span>
+          {/if}
+        </div>
       </SoftKey>
     </ViewFooter>
   {/if}
 </View>
 
-<style global lang="postcss" type="text/postcss">
+<style global lang="postcss">
   .player-content {
     @apply flex flex-col items-center px-4;
   }

@@ -1,8 +1,8 @@
 <script lang="ts">
   import { push } from 'svelte-spa-router';
 
-  import ListItem from '@/ui/components/list/ListItem.svelte';
   import ListHeader from '@/ui/components/list/ListHeader.svelte';
+  import ListItem from '@/ui/components/list/ListItem.svelte';
 
   import type { EditorPickList } from '@/lib/models';
 
@@ -29,7 +29,7 @@
   </ListItem>
 {/each}
 
-<style lang="postcss" type="text/postcss">
+<style lang="postcss">
   .comment {
     @apply p-1;
   }

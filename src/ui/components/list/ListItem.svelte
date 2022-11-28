@@ -12,7 +12,7 @@
   export let imageSize: IconSize = IconSize.Medium;
   export let icon: typeof SvelteComponent = null;
   export let iconColor: Color = Color.Primary;
-  export let align: Alignment = Alignment.Left;
+  export let align: Alignment = Alignment.Middle;
   export let primaryText: string = null;
   export let secondaryText: string = null;
   export let accentText: string = null;
@@ -26,7 +26,7 @@
       <div class="shortcut">{navi.shortcutKey}</div>
     {/if}
     {#if icon}
-      <div class="icon">
+      <div class="icon" style={align === Alignment.Top && `margin-top: 2px`}>
         <Icon size={imageSize} color={iconColor}><svelte:component this={icon} /></Icon>
       </div>
     {/if}
@@ -36,7 +36,7 @@
         class:circle={imageStyle === 'circle'}
         src={imageUrl}
         alt=""
-        style={`height: ${imageSize}px; width: ${imageSize}px;`}
+        style={`height: ${imageSize}px; width: ${imageSize}px;` + (align === Alignment.Top && `margin-top: 4px`)}
       />
     {/if}
     <div class="container">
@@ -64,12 +64,9 @@
   </div>
 </NavItem>
 
-<style>
+<style lang="postcss">
   .root {
-    padding: 7px;
-    display: flex;
-    align-items: center;
-    border-bottom: 1px solid var(--divider-color);
+    @apply flex items-center p-4 border-b border-divider;
   }
 
   .icon {

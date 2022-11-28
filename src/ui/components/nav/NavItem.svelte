@@ -4,6 +4,7 @@
 
   export let navi: Navigation;
   export let disabled = false;
+  export let focusable = true;
   export let contextMenu: ContextMenu = null;
   export let display: 'inline-block' | 'block' | 'flex' = 'block';
 
@@ -24,6 +25,7 @@
 
 <div
   class="root"
+  class:focusd={focusable}
   class:disabled
   style={`display: ${display};`}
   data-onyx-item-id={navi.itemId}

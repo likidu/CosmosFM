@@ -21,6 +21,7 @@ module.exports = {
       fontSize: {
         sm: '1.2rem',
         base: '1.4rem',
+        lg: '1.6rem',
       },
       fontWeight: {
         bold: 'var(--bold-font-weight)',
