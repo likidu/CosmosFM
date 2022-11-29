@@ -8,7 +8,7 @@
   import ViewContent from '@/ui/components/view/ViewContent.svelte';
   import ViewFooter from '@/ui/components/view/ViewFooter.svelte';
   import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
-  import { IconSize } from '@/ui/enums';
+  import { Alignment, IconSize } from '@/ui/enums';
 
   import { dayjs } from 'svelte-time';
 
@@ -42,6 +42,7 @@
         {#each page.data as comment, j}
           <ListItem
             imageUrl={comment.author.avatar.picture.thumbnailUrl}
+            align={Alignment.Top}
             imageStyle="circle"
             imageSize={IconSize.Small}
             primaryText={comment.author.nickname}
@@ -51,7 +52,7 @@
             <div slot="bottom" class="comment-content">
               <section class="line-clamp-4">{@html comment.text}</section>
               {#if comment.replies.length > 0}
-                <div class="comment-reply">
+                <div class="comment-reply text-sm">
                   {#each comment.replies as reply}
                     <div class="line-clamp-3">
                       <span class="text-secondary">{reply.author.nickname}&#58; </span>
@@ -83,3 +84,13 @@
     </ViewFooter>
   {/if}
 </View>
+
+<style lang="postcss">
+  /* Route: Comment */
+  .comment-content {
+    @apply my-2;
+  }
+  .comment-reply {
+    @apply p-2;
+  }
+</style>

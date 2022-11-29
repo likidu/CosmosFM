@@ -46,7 +46,7 @@
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 9;
+    z-index: 10;
   }
   .scrim {
     position: absolute;

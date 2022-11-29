@@ -102,9 +102,7 @@
   .primary,
   .secondary,
   .accent {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    @apply line-clamp-1;
   }
   .primary {
     /* font-weight: 600; */

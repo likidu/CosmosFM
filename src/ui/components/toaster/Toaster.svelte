@@ -59,7 +59,7 @@
     position: absolute;
     right: 0;
     left: 0;
-    z-index: 9;
+    z-index: 10;
     transition: transform calc(var(--animation-speed) * 2);
     transition-timing-function: ease-in;
     transform: translateY(0px);

@@ -53,6 +53,6 @@ module.exports = {
       },
     },
     variants: {},
-    plugins: [lineClamp, gradients],
   },
+  plugins: [lineClamp, gradients],
 };
