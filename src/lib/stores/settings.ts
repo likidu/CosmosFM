@@ -7,6 +7,7 @@ import { themes } from '@/lib/configs/themes';
 import type { Settings } from '@/lib/models';
 
 const defaultSettings: Partial<Settings> = {
+  // General
   themeId: themes[2].id,
   textSize: TextSize.Medium,
   textWeight: TextWeight.Medium,
@@ -16,7 +17,7 @@ const defaultSettings: Partial<Settings> = {
   showHelpText: true,
   // Shortcuts
   enableShortcutKeys: true,
-  shortcutKeyLocation: 'right',
+  shortcutKeyLocation: 'left',
   shortcutKeyColor: 'secondary',
   contextMenuIndicators: true,
   // Theme

@@ -4,7 +4,11 @@
 
   export let backgroundImageUrl: string = null;
 
-  const style = backgroundImageUrl ? `background-image: url('${backgroundImageUrl}'); background-size: cover;` : '';
+  const backgroundImage = backgroundImageUrl
+    ? `background-image: url('${backgroundImageUrl}'); background-size: cover;`
+    : '';
+  // TODO: Not directly use process.env here
+  const backgroundColor = !!process.env.IS_LEGACY ? 'background-color: var(--card-color);' : '';
 
   // onMount(() => OnyxNavigation.restoreFocusedItems());
   onDestroy(() => {
@@ -13,7 +17,7 @@
   });
 </script>
 
-<div class="root absolute inset-0 z-10" {style}>
+<div class="root absolute inset-0 z-10" style={`${backgroundColor}${backgroundImage}`}>
   <slot />
 </div>
 

@@ -71,5 +71,7 @@
   <QueryClientProvider client={queryClient}>
     <Router {routes} />
   </QueryClientProvider>
-  <StripShade />
+  {#if !process.env.IS_LEGACY}
+    <StripShade />
+  {/if}
 </OnyxApp>

@@ -2,6 +2,7 @@ import type { Animations, Density, TextSize, TextWeight } from '../enums';
 import type { ThemeSettings } from './ThemeSettings';
 
 export type BaseSettings = ThemeSettings & {
+  // General
   textSize: TextSize;
   textWeight: TextWeight;
   displayDensity: Density;
@@ -19,6 +20,5 @@ export type BaseSettings = ThemeSettings & {
   // Toaster
   toasterLocation: 'top' | 'bottom';
   toasterDuration: number;
-
   showHelpText: boolean;
 };

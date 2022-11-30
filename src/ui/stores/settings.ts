@@ -6,6 +6,7 @@ import { themes } from '../themes';
 type Config = BaseSettings;
 
 const defaultConfig: Config = {
+  // General
   themeId: themes[0].id,
   textSize: TextSize.Medium,
   textWeight: TextWeight.Medium,
