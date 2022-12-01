@@ -36,7 +36,7 @@
         class:circle={imageStyle === 'circle'}
         src={imageUrl}
         alt=""
-        style={`height: ${imageSize}px; width: ${imageSize}px;` + (align === Alignment.Top && `margin-top: 4px`)}
+        style={`height: ${imageSize}px; width: ${imageSize}px;` + (align === Alignment.Top && `margin-top: 3px`)}
       />
     {/if}
     <div class="container">

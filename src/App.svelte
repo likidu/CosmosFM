@@ -55,7 +55,7 @@
         pop();
       },
     },
-    { priority: 4 },
+    { priority: 1 },
   );
 
   $: Onyx.settings.update($settings);

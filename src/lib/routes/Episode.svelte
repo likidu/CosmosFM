@@ -104,7 +104,7 @@
           </div>
         </NavItem>
         <!-- Wrap below in NavItem just for the focus move away from the podcast link -->
-        <NavItem navi={{ itemId: 'episode-section-2' }} focusable={false}>
+        <NavItem navi={{ itemId: 'episode-section-2' }} nofocus={true}>
           <div class="flex space-x-2 text-secondary mb-4">
             <span>{time[0] ? `${time[0]}hrs` : ''} {`${time[1]}mins`}</span>
             <span>/</span>
