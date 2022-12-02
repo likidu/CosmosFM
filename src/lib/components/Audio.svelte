@@ -7,6 +7,11 @@
   audio.mozAudioChannelType = 'content';
   audio.preload = 'auto';
 
+  audio.onload = () => {
+    audio.play();
+    setTimeout(audio.pause.bind(audio), 10);
+  };
+
   audio.onloadedmetadata = () => {};
 
   audio.onloadeddata = () => {};
