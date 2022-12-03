@@ -5,7 +5,7 @@
   const console = (function (oldCons) {
     return {
       ...oldCons,
-      warn: function (text) {
+      warn: function (text: string) {
         oldCons.warn(text);
         warn = text;
       },

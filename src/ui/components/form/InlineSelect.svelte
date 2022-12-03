@@ -1,7 +1,7 @@
 <script lang="ts">
+  import { IconChevronLeft, IconChevronRight } from '@/ui/icons';
   import { OnyxKeys } from 'onyx-keys';
   import { onDestroy } from 'svelte';
-  import { IconChevronLeft, IconChevronRight } from '@/ui/icons';
   import { IconSize } from '../../enums/iconSize';
   import type { SelectOption } from '../../models';
   import { getIndex } from '../../utils';
@@ -13,8 +13,8 @@
   export let disabled = false;
   export let wrap = false;
 
-  let hasNext;
-  let hasPrev;
+  let hasNext: boolean;
+  let hasPrev: boolean;
   $: {
     const index = options.findIndex((a) => a.id === value);
     hasNext = wrap || !!options[index + 1];

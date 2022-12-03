@@ -5,7 +5,7 @@
   export let color: Color | string = Color.Primary;
   export let disabled = false;
 
-  let colorValue;
+  let colorValue: string;
   switch (color) {
     case Color.Accent:
       colorValue = 'var(--accent-color)';
