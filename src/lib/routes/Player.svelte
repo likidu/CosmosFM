@@ -1,16 +1,13 @@
 <script lang="ts">
-  import { pause, play, reload, skip, skipTo, src } from '@/lib/components/Audio.svelte';
-  import { useEpisode } from '@/lib/services';
-  import { player } from '@/lib/stores/player';
-  import { OnyxKeys } from 'onyx-keys';
-
   import KaiOS from 'kaios-lib';
+  import { OnyxKeys } from 'onyx-keys';
   import { onDestroy } from 'svelte';
   import { push } from 'svelte-spa-router';
 
   import Progressbar from '@/ui/components/form/Progressbar.svelte';
   import Icon from '@/ui/components/icon/Icon.svelte';
-  import Typography from '@/ui/components/Typography.svelte';
+  import SoftKey from '@/ui/components/softkey/SoftKey.svelte';
+  import Typography from '@/ui/components/text/Typography.svelte';
   import View from '@/ui/components/view/View.svelte';
   import ViewContent from '@/ui/components/view/ViewContent.svelte';
   import ViewFooter from '@/ui/components/view/ViewFooter.svelte';
@@ -19,7 +16,11 @@
   import { IconBackward, IconComment, IconForward, IconInfo, IconPause, IconPlay } from '@/ui/icons';
 
   import { formatSeconds } from '@/lib/utils';
-  import SoftKey from '@/ui/components/softkey/SoftKey.svelte';
+
+  import { pause, play, reload, skip, skipTo, src } from '@/lib/components/Audio.svelte';
+  import LineClamp from '@/lib/components/LineClamp.svelte';
+  import { useEpisode } from '@/lib/services';
+  import { player } from '@/lib/stores/player';
 
   let eid: string;
   let progress = 0;
@@ -107,7 +108,7 @@
     <Typography align="center">Error!</Typography>
   {:else}
     {@const episode = $episode.data}
-    {@const podcastColor = episode.podcast.color.light}
+    {@const podcastColor = episode.podcast.color.dark}
     <ViewHeader title={episode.podcast.title} style={`color: ${podcastColor}`} />
     <ViewContent>
       <div class="player-content">
@@ -116,7 +117,7 @@
         {:else}
           <img src={episode.podcast.image.smallPicUrl} alt="Podcast Cover" width={imageSize} />
         {/if}
-        <h1 class="line-clamp-2">{episode.title}</h1>
+        <LineClamp><h1>{episode.title}</h1></LineClamp>
       </div>
     </ViewContent>
     <ViewFooter>

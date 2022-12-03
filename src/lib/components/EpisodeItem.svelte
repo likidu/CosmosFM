@@ -8,6 +8,7 @@
   import { Alignment, Color, IconSize } from '@/ui/enums';
   import { IconComment, IconHeadphone } from '@/ui/icons';
 
+  import LineClamp from '@/lib/components/LineClamp.svelte';
   import type { Episode } from '@/lib/models';
   import { placeholderImage } from '@/lib/utils';
 
@@ -33,28 +34,32 @@
   <ListItem
     imageUrl={url ?? placeholderImage}
     align={Alignment.Top}
-    secondaryText={episode.description}
     navi={{ itemId: `${episode.type}_${idx + 1}`, onSelect: () => push(`/episode/${episode.eid}`) }}
   >
-    <div slot="primaryText" class="line-clamp-2">
-      <!-- We use slot to highligh the search keyword -->
-      {#if chunks}
-        {#each chunks as chunk (chunk.key)}
-          <span class:highlight={chunk.match}>{chunk.text}</span>
-        {/each}
-      {:else}
-        <span>{episode.title}</span>
-      {/if}
-    </div>
-    <div slot="bottom" class="stats">
-      <div class="item">
-        <Icon size={IconSize.Smallest} color={Color.Secondary}><IconComment /></Icon>
-        <span>{episode.commentCount}</span>
-      </div>
-      <div class="item">
-        <Icon size={IconSize.Smallest} color={Color.Secondary}><IconHeadphone /></Icon>
-        <span>{episode.playCount}</span>
-      </div>
+    <svelte:fragment slot="primaryText">
+      <LineClamp>
+        <!-- We use slot to highligh the search keyword -->
+        {#if chunks}
+          {#each chunks as chunk (chunk.key)}
+            <span class:highlight={chunk.match}>{chunk.text}</span>
+          {/each}
+        {:else}
+          <span>{episode.title}</span>
+        {/if}
+      </LineClamp>
+    </svelte:fragment>
+    <div slot="bottom">
+      <LineClamp><span class="text-sm text-secondary">{episode.description}</span></LineClamp>
+      <section class="stats">
+        <div class="item">
+          <Icon size={IconSize.Smallest} color={Color.Secondary}><IconComment /></Icon>
+          <span>{episode.commentCount}</span>
+        </div>
+        <div class="item">
+          <Icon size={IconSize.Smallest} color={Color.Secondary}><IconHeadphone /></Icon>
+          <span>{episode.playCount}</span>
+        </div>
+      </section>
     </div>
   </ListItem>
 {/if}
@@ -64,7 +69,7 @@
     color: var(--secondary-text-color);
     @apply flex space-x-6 mt-1;
   }
-  :global(.stats .item) {
+  :global(.stats > .item) {
     @apply flex items-center space-x-1 text-xl;
   }
   .highlight {

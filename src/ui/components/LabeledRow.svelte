@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Typography from './Typography.svelte';
+  import Typography from './text/Typography.svelte';
 
   export let label: string;
 </script>

@@ -5,13 +5,12 @@
   import ListItem from '@/ui/components/list/ListItem.svelte';
   import { Alignment } from '@/ui/enums';
 
+  import LineClamp from '@/lib/components/LineClamp.svelte';
   import type { EditorPickList } from '@/lib/models';
 
   export let list: EditorPickList;
 
   const { data } = list;
-
-  // TODO: line clamp is not working on KaiOS 2.5
 </script>
 
 <ListHeader title={data.date} />
@@ -19,20 +18,24 @@
   <ListItem
     imageUrl={pick.episode.podcast.image.thumbnailUrl}
     align={Alignment.Top}
-    primaryText={pick.episode.title}
     secondaryText={pick.episode.podcast.title}
     navi={{ itemId: `EDITOR_PICK_${i + 1}`, onSelect: () => push(`/episode/${pick.episode.eid}`) }}
   >
-    <div slot="bottom" class="comment">
-      <p class="line-clamp-3 text-sm pl-2 border-l border-divider">
-        <strong>{pick.comment.author.nickname}: </strong>{pick.comment.text}
-      </p>
-    </div>
+    <svelte:fragment slot="primaryText">
+      <LineClamp><span>{pick.episode.title}</span></LineClamp>
+    </svelte:fragment>
+    <svelte:fragment slot="bottom">
+      <LineClamp class="pick-comment">
+        <p class="text-sm pl-2 border-l border-divider">
+          <strong>{pick.comment.author.nickname}: </strong>{pick.comment.text}
+        </p>
+      </LineClamp>
+    </svelte:fragment>
   </ListItem>
 {/each}
 
 <style lang="postcss">
-  .comment {
+  :global(.pick-comment) {
     @apply p-1;
   }
 </style>

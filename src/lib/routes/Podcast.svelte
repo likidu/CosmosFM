@@ -7,18 +7,19 @@
   import Icon from '@/ui/components/icon/Icon.svelte';
   import ListHeader from '@/ui/components/list/ListHeader.svelte';
   import ListItem from '@/ui/components/list/ListItem.svelte';
-  import Typography from '@/ui/components/Typography.svelte';
+  import SoftKey from '@/ui/components/softkey/SoftKey.svelte';
+  import Typography from '@/ui/components/text/Typography.svelte';
   import View from '@/ui/components/view/View.svelte';
   import ViewContent from '@/ui/components/view/ViewContent.svelte';
+  import ViewFooter from '@/ui/components/view/ViewFooter.svelte';
+  import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
   import { Alignment, IconSize } from '@/ui/enums';
   import { IconMenu, IconPodcast, IconSubscribeAdd, IconSubscribeRemove } from '@/ui/icons';
   import { Onyx } from '@/ui/services';
 
+  import LineClamp from '@/lib/components/LineClamp.svelte';
   import type { SubscriptionMode } from '@/lib/models';
   import { Cosmos, useEpisodeList, usePodcast } from '@/lib/services';
-  import SoftKey from '@/ui/components/softkey/SoftKey.svelte';
-  import ViewFooter from '@/ui/components/view/ViewFooter.svelte';
-  import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
 
   export let params: { pid: string };
 
@@ -76,7 +77,7 @@
     <ViewContent>
       <div class="flex flex-col space-y-2 px-3">
         <div class="flex space-x-2">
-          <p class="line-clamp-4">{podcast.description}</p>
+          <LineClamp lines={4}><span>{podcast.description}</span></LineClamp>
           <img src={podcast.image.thumbnailUrl} class="inline-box rounded-sm w-24 h-24" alt="Podcast" />
         </div>
         {#each podcast.podcasters as podcaster}
@@ -103,12 +104,14 @@
           <ListItem
             icon={IconPodcast}
             align={Alignment.Top}
-            primaryText={episode.title}
             navi={{ itemId: `EPISODE_${i + 1}`, onSelect: () => push(`/episode/${episode.eid}`) }}
           >
-            <div slot="bottom">
-              <p class="line-clamp-2 text-sm">{episode.description}</p>
-            </div>
+            <svelte:fragment slot="primaryText">
+              <LineClamp><span>{episode.title}</span></LineClamp>
+            </svelte:fragment>
+            <svelte:fragment slot="bottom">
+              <LineClamp><span class="text-sm text-secondary">{episode.description}</span></LineClamp>
+            </svelte:fragment>
           </ListItem>
         {/each}
       {/if}

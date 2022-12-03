@@ -6,7 +6,7 @@
   import { contextMenu } from '../../stores';
   import { getShortcutFromIndex } from '../../utils';
   import NavGroup from '../nav/NavGroup.svelte';
-  import Typography from '../Typography.svelte';
+  import Typography from '../text/Typography.svelte';
   import ContextMenuItem from './ContextMenuItem.svelte';
 
   let working: string | null = null;

@@ -11,7 +11,7 @@
   import { player } from '@/lib/stores/player';
   import Icon from '@/ui/components/icon/Icon.svelte';
   import NavItem from '@/ui/components/nav/NavItem.svelte';
-  import Typography from '@/ui/components/Typography.svelte';
+  import Typography from '@/ui/components/text/Typography.svelte';
   import View from '@/ui/components/view/View.svelte';
   import ViewContent from '@/ui/components/view/ViewContent.svelte';
   import { IconSize, RenderState } from '@/ui/enums';
