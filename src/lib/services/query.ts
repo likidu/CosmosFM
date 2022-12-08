@@ -10,6 +10,8 @@ import type {
   CommentListRequest,
   CommentLoadMoreKey,
   DiscoveryList,
+  DiscoveryListMoreKey,
+  DiscoveryListRequest,
   Episode,
   EpisodeList,
   InboxList,
@@ -23,15 +25,24 @@ import type {
  * Discovery list
  * @returns DiscoveryList
  */
-const discoveryList = async (): Promise<DiscoveryList> => {
-  const request = { returnAll: false };
+const discoveryList = async (pageParam?: DiscoveryListMoreKey): Promise<DiscoveryList> => {
+  let request: DiscoveryListRequest = { returnAll: false };
+  if (pageParam) request = { loadMoreKey: pageParam, ...request };
 
   const { data } = await client.post('/discovery-feed/list', request);
   return data;
 };
 
 // {querykey, pageParam} are what pass to the queryFn
-export const useDiscoveryList = () => useQuery(['discovery'], () => discoveryList());
+// export const useDiscoveryList = () => useQuery(['discovery'], () => discoveryList());
+
+export const useDiscoveryList = () =>
+  useInfiniteQuery(['discovery'], ({ pageParam }) => discoveryList(pageParam), {
+    getNextPageParam: (lastList) => {
+      return lastList.loadMoreKey ? lastList.loadMoreKey : undefined;
+    },
+    retry: false,
+  });
 
 /**
  * Individual Episode
@@ -63,7 +74,7 @@ export const usePodcast = (pid: string) => useQuery(['podcast', pid], () => podc
 /**
  * Comment list
  * @param eid
- * @param pageParam
+ * @param pageParam: what's returned from getNextPageParam()
  * @returns CommentList
  */
 const commentList = async (eid: string, pageParam: CommentLoadMoreKey): Promise<CommentList> => {
@@ -73,6 +84,15 @@ const commentList = async (eid: string, pageParam: CommentLoadMoreKey): Promise<
   const { data } = await client.post('/comment/list-primary', request);
   return data;
 };
+
+// {querykey, pageParam} are what pass to the queryFn
+export const useCommentList = (eid: string) =>
+  useInfiniteQuery(['comment-list', eid], ({ pageParam }) => commentList(eid, pageParam), {
+    getNextPageParam: (lastList) => {
+      return lastList.loadMoreKey ? lastList.loadMoreKey : undefined;
+    },
+    retry: false,
+  });
 
 /**
  * Episode List
@@ -86,15 +106,6 @@ const episodeList = async (pid: string, limit = 15): Promise<EpisodeList> => {
 };
 
 export const useEpisodeList = (pid: string) => useQuery('episode-list', () => episodeList(pid));
-
-// {querykey, pageParam} are what pass to the queryFn
-export const useCommentList = (eid: string) =>
-  useInfiniteQuery(['comment-list', eid], ({ pageParam }) => commentList(eid, pageParam), {
-    getNextPageParam: (lastList) => {
-      return lastList.loadMoreKey ? lastList.loadMoreKey : undefined;
-    },
-    retry: false,
-  });
 
 /**
  * Inbox list

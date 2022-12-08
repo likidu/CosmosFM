@@ -3,6 +3,7 @@
 
   import ListHeader from '@/ui/components/list/ListHeader.svelte';
   import ListItem from '@/ui/components/list/ListItem.svelte';
+  import { Alignment } from '@/ui/enums';
 
   import LineClamp from '@/lib/components/LineClamp.svelte';
   import type { TopList } from '@/lib/models';
@@ -17,6 +18,7 @@
   {#each topList.items as list, i}
     <ListItem
       imageUrl={list.item.podcast.image.thumbnailUrl}
+      align={Alignment.Top}
       secondaryText={list.item.podcast.title}
       navi={{ itemId: `${topList.category}_${i + 1}`, onSelect: () => push(`/episode/${list.item.eid}`) }}
     >

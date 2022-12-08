@@ -21,8 +21,8 @@
   let params: URLSearchParams;
 
   // Input fields
-  let area = '+1';
-  let mobile = '2067711184';
+  let area = '+86';
+  let mobile = '13817930979';
   let code = '';
 
   // Step specific texts

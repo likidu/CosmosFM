@@ -5,12 +5,23 @@
   import ViewContent from '@/ui/components/view/ViewContent.svelte';
 
   import Banner from '@/lib/components/Banner.svelte';
-  import EditorPick from '@/lib/components/EditorPick.svelte';
-  import Top from '@/lib/components/Top.svelte';
+  import EditorPickList from '@/lib/components/EditorPickList.svelte';
+  import TopList from '@/lib/components/TopList.svelte';
   import { useDiscoveryList } from '@/lib/services';
   import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
+  import DiscoveryLoadMoreList from '../components/DiscoveryLoadMoreList.svelte';
+
+  let loadMoreTitle: string;
 
   const discoveryList = useDiscoveryList();
+
+  $: if ($discoveryList.isFetching) {
+    loadMoreTitle = 'Loading more...';
+  } else if ($discoveryList.hasNextPage) {
+    loadMoreTitle = 'Load more';
+  } else {
+    loadMoreTitle = 'End of list';
+  }
 </script>
 
 <View>
@@ -21,20 +32,25 @@
     {:else if $discoveryList.status === 'error'}
       <Typography align="center">Error!</Typography>
     {:else}
-      {#each $discoveryList.data.data as list}
-        {#if list.type === 'DISCOVERY_BANNER'}
-          <Banner content={list} />
-        {:else if list.type === 'EDITOR_PICK'}
-          <EditorPick {list} />
-        {:else if list.type === 'TOP_LIST'}
-          <Top {list} />
-        {/if}
+      {#each $discoveryList.data.pages as page, i}
+        {#each page.data as list}
+          {#if list.type === 'DISCOVERY_BANNER'}
+            <Banner content={list} />
+          {:else if list.type === 'EDITOR_PICK'}
+            <EditorPickList {list} />
+          {:else if list.type === 'TOP_LIST'}
+            <TopList {list} />
+          {:else if list.type === 'DISCOVERY_COLLECTION'}
+            <DiscoveryLoadMoreList {list} />
+          {/if}
+        {/each}
       {/each}
       <Button
-        title="Keep discovering"
-        disabled={true}
+        title={loadMoreTitle}
+        disabled={!$discoveryList.hasNextPage || $discoveryList.isFetchingNextPage}
         navi={{
           itemId: 'DISCOVERY_LOAD_MORE',
+          onSelect: () => $discoveryList.fetchNextPage(),
         }}
       />
     {/if}

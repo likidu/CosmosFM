@@ -18,16 +18,16 @@
 
   export let params: { eid: string };
 
-  let load: string;
+  let loadMoreTitle: string;
 
   const comments = useCommentList(params.eid);
 
   $: if ($comments.isFetching) {
-    load = 'Loading more...';
+    loadMoreTitle = 'Loading more...';
   } else if ($comments.hasNextPage) {
-    load = 'Load more';
+    loadMoreTitle = 'Load more';
   } else {
-    load = 'End of list';
+    loadMoreTitle = 'End of list';
   }
 </script>
 
@@ -69,10 +69,10 @@
         {/each}
       {/each}
       <Button
-        title={load}
+        title={loadMoreTitle}
         disabled={!$comments.hasNextPage || $comments.isFetchingNextPage}
         navi={{
-          itemId: 'LOAD_MORE',
+          itemId: 'COMMENT_LOAD_MORE',
           onSelect: () => $comments.fetchNextPage(),
         }}
       />
