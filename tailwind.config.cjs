@@ -41,6 +41,12 @@ module.exports = {
       transformOrigin: {
         '1/2': '50%',
       },
+      lineClamp: {
+        1: '1',
+        2: '2',
+        3: '3',
+        4: '4',
+      },
       linearGradientColors: {
         'gray-cover': ['rgba(229, 231, 235) 0%', 'white 20%', 'white 100%'],
         'gray-strip': ['rgb(156, 163, 175)', 'rgb(156, 163, 175) 2px', 'white 2px', 'white'],

@@ -13,9 +13,10 @@
   import ViewContent from '@/ui/components/view/ViewContent.svelte';
   import ViewFooter from '@/ui/components/view/ViewFooter.svelte';
   import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
-  import { Alignment, IconSize } from '@/ui/enums';
+  import { Alignment, IconSize, RenderState } from '@/ui/enums';
   import { IconMenu, IconPodcast, IconSubscribeAdd, IconSubscribeRemove } from '@/ui/icons';
   import { Onyx } from '@/ui/services';
+  import { appMenu, dialog } from '@/ui/stores';
 
   import LineClamp from '@/lib/components/LineClamp.svelte';
   import type { SubscriptionMode } from '@/lib/models';
@@ -38,7 +39,7 @@
             title: 'Subscribe Podcast',
             body: `Do you want to subscribe to ${$podcast.data.title}?`,
             actions: {
-              left: { label: 'Cancel', fn: () => console.log('Cancel') },
+              left: { label: 'Cancel', fn: () => console.log('Cancel subscribe') },
               right: { label: 'Subscribe', fn: () => updateSubscription(pid, 'ON') },
             },
           });
@@ -47,15 +48,30 @@
             title: 'Unsubscribe Podcast',
             body: `Do you want to unsubscribe to ${$podcast.data.title}?`,
             actions: {
-              left: { label: 'Cancel', fn: () => console.log('Cancel') },
+              left: { label: 'Cancel', fn: () => console.log('Cancel unsubscribe') },
               right: { label: 'Unsubscribe', fn: () => updateSubscription(pid, 'OFF') },
             },
           });
         }
       },
     },
-    { priority: 3 },
+    { priority: 4 },
   );
+
+  // Ensure podcast data is loaded
+  $: pid = $podcast.data?.pid;
+
+  // Prevent keyManager from working when the episode data is not loaded yet and dialog is opened
+  $: {
+    if (pid && $dialog.state === RenderState.Destroyed) keyMan.enable();
+    else keyMan.disable();
+  }
+
+  // TODO: Do we need this?
+  $: {
+    if ($appMenu.state === RenderState.Destroyed) keyMan.enable();
+    else keyMan.disable();
+  }
 
   function updateSubscription(pid: string, mode: SubscriptionMode) {
     Cosmos.updateSubscription(pid, mode);

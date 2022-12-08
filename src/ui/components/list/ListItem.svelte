@@ -40,6 +40,9 @@
       />
     {/if}
     <div class="container">
+      {#if accentText}
+        <div class="accent">{accentText}</div>
+      {/if}
       {#if primaryText}
         <div class="primary">{primaryText}</div>
       {:else}
@@ -47,9 +50,6 @@
       {/if}
       {#if secondaryText}
         <div class="secondary">{secondaryText}</div>
-      {/if}
-      {#if accentText}
-        <div class="accent">{accentText}</div>
       {/if}
       <slot name="bottom" />
     </div>
