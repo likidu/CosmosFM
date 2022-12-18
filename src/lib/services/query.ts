@@ -18,6 +18,7 @@ import type {
   Podcast,
   SearchPreset,
   SearchResultList,
+  SubscriptionList,
   UserStats,
 } from '@/lib/models';
 
@@ -118,6 +119,18 @@ const inboxList = async (limit = 10): Promise<InboxList> => {
 };
 
 export const useInboxList = () => useQuery('inbox-list', () => inboxList());
+
+/**
+ * Subscription list
+ * @param limit
+ * @returns SubscriptionList
+ */
+const subscriptionList = async (limit = 20): Promise<SubscriptionList> => {
+  const { data } = await client.post('/subscription/list', { sortOrder: 'desc', limit, sortBy: 'subscribedAt' });
+  return data;
+};
+
+export const useSubscriptionList = () => useQuery('subscription-list', () => subscriptionList());
 
 /**
  * Search

@@ -8,4 +8,5 @@ export { default as Player } from './Player.svelte';
 export { default as Podcast } from './Podcast.svelte';
 export { default as Search } from './Search.svelte';
 export { default as SearchResult } from './SearchResult.svelte';
+export { default as Subscription } from './Subscription.svelte';
 export { default as User } from './User.svelte';

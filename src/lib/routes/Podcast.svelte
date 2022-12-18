@@ -105,7 +105,7 @@
         <div class="flex items-center justify-between space-x-2">
           <p><strong>{podcast.subscriptionCount}</strong> subscribers</p>
           {#if podcast.subscriptionStatus === 'ON'}
-            <p>Subscribed</p>
+            <p class="text-accent">Subscribed</p>
           {/if}
         </div>
       </div>

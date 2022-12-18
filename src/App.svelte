@@ -22,6 +22,7 @@
     Podcast,
     Search,
     SearchResult,
+    Subscription,
     User,
   } from '@/lib/routes';
   import { settings } from '@/lib/stores/settings';
@@ -37,6 +38,7 @@
     '/podcast/:pid': Podcast,
     '/player': Player,
     '/search/': Search,
+    '/Subscription': Subscription,
     '/search/:keyword': SearchResult,
     '/user': User,
     '/comment/:eid': Comment,

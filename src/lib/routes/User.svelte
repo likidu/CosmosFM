@@ -91,7 +91,7 @@
   </ViewContent>
 </View>
 
-<style lang="postcss">
+<style global lang="postcss">
   .user-stats {
     @apply px-3;
   }
