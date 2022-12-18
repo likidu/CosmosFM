@@ -92,7 +92,7 @@
         <h1>{episode.title}</h1>
         <NavItem
           navi={{
-            itemId: 'episode-section-1',
+            itemId: 'EPISODE-SECTION-1',
             onFocus: () => keyMan.disable(),
             onBlur: () => keyMan.enable(),
             onSelect: () => push(`/podcast/${episode.podcast.pid}`),
@@ -104,7 +104,7 @@
           </div>
         </NavItem>
         <!-- Wrap below in NavItem just for the focus move away from the podcast link -->
-        <NavItem navi={{ itemId: 'episode-section-2' }} nofocus={true}>
+        <NavItem navi={{ itemId: 'EPISODE-SECTION-2' }} nofocus={true}>
           <div class="flex space-x-2 text-secondary mb-4">
             <span>{time[0] ? `${time[0]}hrs` : ''} {`${time[1]}mins`}</span>
             <span>/</span>

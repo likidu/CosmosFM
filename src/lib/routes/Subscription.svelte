@@ -4,6 +4,7 @@
   import { push } from 'svelte-spa-router';
 
   import Icon from '@/ui/components/icon/Icon.svelte';
+  import NavItem from '@/ui/components/nav/NavItem.svelte';
   import SoftKey from '@/ui/components/softkey/SoftKey.svelte';
   import Typography from '@/ui/components/text/Typography.svelte';
   import View from '@/ui/components/view/View.svelte';
@@ -11,17 +12,16 @@
   import ViewFooter from '@/ui/components/view/ViewFooter.svelte';
   import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
   import { IconSize } from '@/ui/enums';
-  import { IconMenu, IconSubscriptions } from '@/ui/icons';
+  import { IconInbox, IconMenu } from '@/ui/icons';
 
-  import EpisodeItem from '@/lib/components/EpisodeItem.svelte';
-  import { useInboxList } from '@/lib/services';
+  import { useSubscriptionList } from '@/lib/services';
 
-  const inbox = useInboxList();
+  const subscriptions = useSubscriptionList();
 
   const keyMan = OnyxKeys.subscribe(
     {
       onSoftRight: async () => {
-        push('/subscription');
+        push('/inbox');
       },
     },
     { priority: 4 },
@@ -31,16 +31,23 @@
 </script>
 
 <View>
-  <ViewHeader title="Inbox" />
-  {#if $inbox.status === 'loading'}
+  <ViewHeader title="Subscriptions" />
+  {#if $subscriptions.status === 'loading'}
     <Typography align="center">Loading...</Typography>
-  {:else if $inbox.status === 'error'}
+  {:else if $subscriptions.status === 'error'}
     <Typography align="center">Error!</Typography>
   {:else}
     <ViewContent>
-      <div>
-        {#each $inbox.data.data as episode, i}
-          <EpisodeItem {episode} idx={i} icon="podcast" />
+      <div class="grid grid-cols-3">
+        {#each $subscriptions.data.data as podcast, i}
+          <NavItem
+            navi={{
+              itemId: `SUBSCRIPTION-${i + 1}`,
+              onSelect: () => push(`/podcast/${podcast.pid}`),
+            }}
+          >
+            <div class="p-2"><img src={podcast.image.smallPicUrl} alt="" /></div>
+          </NavItem>
         {/each}
       </div>
     </ViewContent>
@@ -48,7 +55,7 @@
   <ViewFooter>
     <SoftKey>
       <div><Icon size={IconSize.Small}><IconMenu /></Icon></div>
-      <div><Icon size={IconSize.Small}><IconSubscriptions /></Icon></div>
+      <div><Icon size={IconSize.Small}><IconInbox /></Icon></div>
     </SoftKey>
   </ViewFooter>
 </View>

@@ -1,3 +1,5 @@
+import type { Podcast } from './Podcast';
+
 export type SubscriptionMode = 'ON' | 'OFF';
 
 export type SubscriptionUpdateRequest = {
@@ -7,4 +9,12 @@ export type SubscriptionUpdateRequest = {
   sourcePageName: number;
 };
 
-export type SubscriptionList = {};
+export type SubscriptionListRequest = {
+  sortOrder: 'desc' | 'aesc';
+  limit: number;
+  sortBy: string;
+};
+
+export type SubscriptionList = {
+  data: Podcast[];
+};
