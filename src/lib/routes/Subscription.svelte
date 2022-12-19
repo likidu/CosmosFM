@@ -32,12 +32,12 @@
 
 <View>
   <ViewHeader title="Subscriptions" />
-  {#if $subscriptions.status === 'loading'}
-    <Typography align="center">Loading...</Typography>
-  {:else if $subscriptions.status === 'error'}
-    <Typography align="center">Error!</Typography>
-  {:else}
-    <ViewContent>
+  <ViewContent>
+    {#if $subscriptions.status === 'loading'}
+      <Typography align="center">Loading...</Typography>
+    {:else if $subscriptions.status === 'error'}
+      <Typography align="center">Error!</Typography>
+    {:else}
       <div class="grid grid-cols-3">
         {#each $subscriptions.data.data as podcast, i}
           <NavItem
@@ -50,8 +50,8 @@
           </NavItem>
         {/each}
       </div>
-    </ViewContent>
-  {/if}
+    {/if}
+  </ViewContent>
   <ViewFooter>
     <SoftKey>
       <div><Icon size={IconSize.Small}><IconMenu /></Icon></div>

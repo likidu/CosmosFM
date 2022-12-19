@@ -32,19 +32,19 @@
 
 <View>
   <ViewHeader title="Inbox" />
-  {#if $inbox.status === 'loading'}
-    <Typography align="center">Loading...</Typography>
-  {:else if $inbox.status === 'error'}
-    <Typography align="center">Error!</Typography>
-  {:else}
-    <ViewContent>
+  <ViewContent>
+    {#if $inbox.status === 'loading'}
+      <Typography align="center">Loading...</Typography>
+    {:else if $inbox.status === 'error'}
+      <Typography align="center">Error!</Typography>
+    {:else}
       <div>
         {#each $inbox.data.data as episode, i}
           <EpisodeItem {episode} idx={i} icon="podcast" />
         {/each}
       </div>
-    </ViewContent>
-  {/if}
+    {/if}
+  </ViewContent>
   <ViewFooter>
     <SoftKey>
       <div><Icon size={IconSize.Small}><IconMenu /></Icon></div>

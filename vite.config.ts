@@ -86,7 +86,7 @@ export default defineConfig({
     'process.env': {},
   },
   server: {
-    port: 5137,
+    port: 5173,
   },
   ...(isLegacy && legacyExtraConfig),
 });
