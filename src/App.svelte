@@ -1,6 +1,6 @@
 <script lang="ts">
   import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
-  import Router, { location, pop, replace } from 'svelte-spa-router';
+  import Router, { pop, replace } from 'svelte-spa-router';
 
   import OnyxApp from '@/ui/components/app/OnyxApp.svelte';
   import { Onyx } from '@/ui/services';
@@ -49,11 +49,11 @@
     {
       onBackspace: async () => {
         // If on the main screen, let KaiOS minimize the app
-        if ($location === '/') {
-          console.log('exit app');
-          return;
-        }
-
+        // if ($location === '/') {
+        //   console.log('exit app');
+        //   return;
+        // }
+        console.log('Ready to pop.');
         pop();
       },
     },
