@@ -17,7 +17,7 @@
 
   import { formatSeconds } from '@/lib/utils';
 
-  import { pause, play, reload, skip, skipTo, src } from '@/lib/components/Audio.svelte';
+  import { pause, play, reload, skip, src } from '@/lib/components/Audio.svelte';
   import LineClamp from '@/lib/components/LineClamp.svelte';
   import { useEpisode } from '@/lib/services';
   import { player } from '@/lib/stores/player';
@@ -53,14 +53,16 @@
         skip(-15);
       },
       onArrowLeftLong: async () => {
-        skipTo(0);
+        // skipTo(0);
+        skip(-60);
       },
       onArrowRight: async () => {
         // Wind 30s
         skip(30);
       },
       onArrowRightLong: async () => {
-        skipTo($player.duration - 10);
+        // skipTo($player.duration - 10);
+        skip(120);
       },
       onArrowUp: async () => {
         new KaiOS.Volume().up().catch(() => {});

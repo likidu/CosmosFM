@@ -68,6 +68,7 @@ export default defineConfig({
   plugins: [svelte(), ...(isLegacy ? legacyPlugins : [])],
   build: {
     rollupOptions: {
+      // @ts-ignore: next-line
       output: {
         name: 'app',
         entryFileNames: `bundle.[hash].js`,
