@@ -1,14 +1,16 @@
 <script lang="ts">
   export let columns = 3;
+
+  let cls = '';
+  export { cls as class };
 </script>
 
-<div class="root" style={`grid-template-columns: repeat(${columns}, 1fr)`}>
+<div class={`root ${cls}`} style={`grid-template-columns: repeat(${columns}, 1fr)`}>
   <slot />
 </div>
 
-<style>
+<style lang="postcss">
   .root {
-    display: grid;
-    grid-auto-rows: max-content;
+    @apply grid auto-rows-max;
   }
 </style>

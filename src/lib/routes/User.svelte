@@ -1,21 +1,30 @@
 <script lang="ts">
-  import { replace } from 'svelte-spa-router';
+  import { push, replace } from 'svelte-spa-router';
 
   import Button from '@/ui/components/buttons/Button.svelte';
+  import SelectRow from '@/ui/components/form/SelectRow.svelte';
   import ListItem from '@/ui/components/list/ListItem.svelte';
   import Typography from '@/ui/components/text/Typography.svelte';
   import View from '@/ui/components/view/View.svelte';
   import ViewContent from '@/ui/components/view/ViewContent.svelte';
+  import ViewFooter from '@/ui/components/view/ViewFooter.svelte';
   import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
-  import { Color } from '@/ui/enums';
+  import { Color, IconSize } from '@/ui/enums';
+  import { IconSubscriptions } from '@/ui/icons';
   import { getShortcutFromIndex } from '@/ui/utils/getShortcutFromIndex';
+  import type { Settings } from '../models';
 
   import { stop } from '@/lib/components/Audio.svelte';
+  import { themes } from '@/lib/configs/themes';
   import { Cosmos, useUserStats } from '@/lib/services';
+  import { settings } from '@/lib/stores/settings';
   import { user } from '@/lib/stores/user';
   import { formatSeconds } from '@/lib/utils';
+  import Divider from '@/ui/components/divider/Divider.svelte';
 
   let items = new Array(3).fill(null);
+
+  console.log(themes);
 
   const userStats = useUserStats($user.uid);
 
@@ -25,6 +34,27 @@
 
     Cosmos.logout();
     replace('/');
+  }
+
+  function handleChange(key: keyof Settings, val: any) {
+    settings.updateOne(key, val);
+
+    if (key === 'themeId') {
+      const theme = themes.find((a) => a.id === $settings.themeId) ?? themes[2];
+      settings.update({
+        accentColorH: theme.values.accentColorH,
+        accentColorS: theme.values.accentColorS,
+        accentColorL: theme.values.accentColorL,
+        cardColorH: theme.values.cardColorH,
+        cardColorS: theme.values.cardColorS,
+        cardColorL: theme.values.cardColorL,
+        textColorH: theme.values.textColorH,
+        textColorS: theme.values.textColorS,
+        textColorL: theme.values.textColorL,
+        focusColorA: theme.values.focusColorA,
+        dividerColorA: theme.values.dividerColorA,
+      });
+    }
   }
 </script>
 
@@ -69,6 +99,25 @@
         </div>
       {/if}
     {/if}
+    <ListItem
+      icon={IconSubscriptions}
+      imageSize={IconSize.Small}
+      primaryText="Subscriptions"
+      navi={{
+        itemId: 'SETTINGS_SUBSCRIPTION',
+        onSelect: () => push('/subscription'),
+      }}
+    />
+    <Divider />
+    <SelectRow
+      label="Theme"
+      value={$settings.themeId}
+      options={[
+        { id: 'cosmos', label: 'Cosmos' },
+        { id: 'light', label: 'Light' },
+      ]}
+      onChange={(val) => handleChange('themeId', val)}
+    />
     {#each items as item, i}
       <ListItem
         imageUrl="https://place-hold.it/32x32&text="
@@ -77,6 +126,7 @@
         navi={{
           itemId: `${i + 1}`,
           shortcutKey: getShortcutFromIndex(i),
+          onSelect: () => {},
         }}
       />
     {/each}
@@ -89,6 +139,7 @@
       }}
     />
   </ViewContent>
+  <ViewFooter />
 </View>
 
 <style global lang="postcss">

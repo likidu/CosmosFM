@@ -1,16 +1,17 @@
 <script lang="ts">
   import { onDestroy } from 'svelte';
+
   import { Onyx } from '../../services';
 
   export let backgroundImageUrl: string = null;
 
+  // If KaiOS v2.5, just fill the background color
   const backgroundImage = backgroundImageUrl
     ? `background-image: url('${backgroundImageUrl}'); background-size: cover;`
     : '';
   // TODO: Not directly use process.env here
   const backgroundColor = !!process.env.IS_LEGACY ? 'background-color: var(--card-color);' : '';
 
-  // onMount(() => OnyxNavigation.restoreFocusedItems());
   onDestroy(() => {
     Onyx.contextMenu.reset();
     Onyx.appMenu.close();

@@ -3,8 +3,9 @@
   import { onDestroy } from 'svelte';
   import { push } from 'svelte-spa-router';
 
+  import Grid from '@/ui/components/grid/Grid.svelte';
+  import GridItem from '@/ui/components/grid/GridItem.svelte';
   import Icon from '@/ui/components/icon/Icon.svelte';
-  import NavItem from '@/ui/components/nav/NavItem.svelte';
   import SoftKey from '@/ui/components/softkey/SoftKey.svelte';
   import Typography from '@/ui/components/text/Typography.svelte';
   import View from '@/ui/components/view/View.svelte';
@@ -38,18 +39,18 @@
     {:else if $subscriptions.status === 'error'}
       <Typography align="center">Error!</Typography>
     {:else}
-      <div class="grid grid-cols-3">
+      <Grid>
         {#each $subscriptions.data.data as podcast, i}
-          <NavItem
+          <GridItem
             navi={{
               itemId: `SUBSCRIPTION-${i + 1}`,
               onSelect: () => push(`/podcast/${podcast.pid}`),
             }}
           >
             <div class="p-2"><img src={podcast.image.smallPicUrl} alt="" /></div>
-          </NavItem>
+          </GridItem>
         {/each}
-      </div>
+      </Grid>
     {/if}
   </ViewContent>
   <ViewFooter>

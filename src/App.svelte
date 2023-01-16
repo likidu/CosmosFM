@@ -1,5 +1,6 @@
 <script lang="ts">
   import { QueryClient, QueryClientProvider } from '@sveltestack/svelte-query';
+  import { onMount } from 'svelte';
   import Router, { location, pop, replace } from 'svelte-spa-router';
 
   import OnyxApp from '@/ui/components/app/OnyxApp.svelte';
@@ -38,19 +39,13 @@
     '/podcast/:pid': Podcast,
     '/player': Player,
     '/search/': Search,
-    '/Subscription': Subscription,
+    '/subscription': Subscription,
     '/search/:keyword': SearchResult,
     '/user': User,
     '/comment/:eid': Comment,
     '*': NotFound,
   };
 
-  // TODO: Fix this in a better way
-  document.addEventListener('keydown', (ev) => {
-    if (ev.key === 'Backspace' && $location !== '/' && (ev.target as any).contentEditable !== 'true') {
-      ev.preventDefault();
-    }
-  });
   const keyMan = OnyxKeys.subscribe(
     {
       onBackspace: async () => {
@@ -69,6 +64,15 @@
   $: Onyx.settings.update($settings);
 
   $: if (!$user) replace('/login');
+
+  onMount(() => {
+    // TODO: Fix this in a better way
+    document.addEventListener('keydown', (ev) => {
+      if (ev.key === 'Backspace' && $location !== '/' && (ev.target as any).contentEditable !== 'true') {
+        ev.preventDefault();
+      }
+    });
+  });
 </script>
 
 <OnyxApp>

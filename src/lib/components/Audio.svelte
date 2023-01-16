@@ -4,6 +4,7 @@
 
   let audio = new Audio();
   // Make KaiOS able to control the volume of it
+  // @ts-ignore KaiOS specific
   audio.mozAudioChannelType = 'content';
   audio.preload = 'auto';
 
