@@ -5,9 +5,9 @@
 
 <div class="root">
   {#if title}
-    <h1 class="title" {style}>
+    <h2 class="title" {style}>
       {title}
-    </h1>
+    </h2>
   {:else}
     <slot />
   {/if}
@@ -18,7 +18,7 @@
     @apply flex items-center overflow-hidden whitespace-nowrap px-1 py-0.5;
   }
   .title {
-    @apply flex-auto text-center overflow-hidden text-ellipsis px-3;
+    @apply flex-auto text-center overflow-hidden text-ellipsis px-2;
     color: var(--accent-color);
     font-weight: 600;
   }

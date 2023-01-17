@@ -4,7 +4,7 @@ import { themes as baseThemes } from '@/ui/themes';
 export const themes: ThemeConfig[] = [
   ...baseThemes,
   {
-    id: 'cosmos',
+    id: 'cosmos-light',
     values: {
       cardColorH: 0,
       cardColorS: 0,
@@ -19,6 +19,25 @@ export const themes: ThemeConfig[] = [
       textColorL: 0,
 
       focusColorA: 7,
+      dividerColorA: 10,
+    },
+  },
+  {
+    id: 'cosmos-dark',
+    values: {
+      cardColorH: 0,
+      cardColorS: 0,
+      cardColorL: 15,
+
+      accentColorH: 200,
+      accentColorS: 63.3,
+      accentColorL: 57.3,
+
+      textColorH: 0,
+      textColorS: 0,
+      textColorL: 100,
+
+      focusColorA: 20,
       dividerColorA: 10,
     },
   },

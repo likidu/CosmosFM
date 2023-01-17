@@ -2,6 +2,7 @@
   import { push, replace } from 'svelte-spa-router';
 
   import Button from '@/ui/components/buttons/Button.svelte';
+  import Divider from '@/ui/components/divider/Divider.svelte';
   import SelectRow from '@/ui/components/form/SelectRow.svelte';
   import ListItem from '@/ui/components/list/ListItem.svelte';
   import Typography from '@/ui/components/text/Typography.svelte';
@@ -11,8 +12,8 @@
   import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
   import { Color, IconSize } from '@/ui/enums';
   import { IconSubscriptions } from '@/ui/icons';
+  import { Onyx } from '@/ui/services';
   import { getShortcutFromIndex } from '@/ui/utils/getShortcutFromIndex';
-  import type { Settings } from '../models';
 
   import { stop } from '@/lib/components/Audio.svelte';
   import { themes } from '@/lib/configs/themes';
@@ -20,20 +21,28 @@
   import { settings } from '@/lib/stores/settings';
   import { user } from '@/lib/stores/user';
   import { formatSeconds } from '@/lib/utils';
-  import Divider from '@/ui/components/divider/Divider.svelte';
+  import type { Settings } from '../models';
 
   let items = new Array(3).fill(null);
-
-  console.log(themes);
 
   const userStats = useUserStats($user.uid);
 
   function logout() {
-    // Stop current playing episode.
-    stop();
-
-    Cosmos.logout();
-    replace('/');
+    Onyx.dialog.show({
+      title: 'Sure to logout?',
+      actions: {
+        center: { label: 'Cancel', fn: () => console.log('Cancel logout.') },
+        right: {
+          label: 'Log out',
+          fn: () => {
+            // Stop current playing episode.
+            stop();
+            Cosmos.logout();
+            replace('/');
+          },
+        },
+      },
+    });
   }
 
   function handleChange(key: keyof Settings, val: any) {
@@ -99,6 +108,7 @@
         </div>
       {/if}
     {/if}
+    <Divider />
     <ListItem
       icon={IconSubscriptions}
       imageSize={IconSize.Small}
@@ -108,13 +118,12 @@
         onSelect: () => push('/subscription'),
       }}
     />
-    <Divider />
     <SelectRow
       label="Theme"
       value={$settings.themeId}
       options={[
-        { id: 'cosmos', label: 'Cosmos' },
-        { id: 'light', label: 'Light' },
+        { id: 'cosmos-light', label: 'Light' },
+        { id: 'cosmos-dark', label: 'Dark' },
       ]}
       onChange={(val) => handleChange('themeId', val)}
     />

@@ -1,3 +1,5 @@
+export { default as IconArrowsDown } from './IconArrowsDown.svelte';
+export { default as IconArrowsUp } from './IconArrowsUp.svelte';
 export { default as IconBackward } from './IconBackward.svelte';
 export { default as IconCheck } from './IconCheck.svelte';
 export { default as IconChevronDown } from './IconChevronDown.svelte';

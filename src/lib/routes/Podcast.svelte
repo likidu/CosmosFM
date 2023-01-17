@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { useQueryClient } from '@sveltestack/svelte-query';
+  import { useQueryClient } from '@tanstack/svelte-query';
   import { OnyxKeys } from 'onyx-keys';
   import { onDestroy } from 'svelte';
   import { push } from 'svelte-spa-router';
@@ -75,7 +75,7 @@
 
   function updateSubscription(pid: string, mode: SubscriptionMode) {
     Cosmos.updateSubscription(pid, mode);
-    queryClient.invalidateQueries('podcast');
+    queryClient.invalidateQueries({ queryKey: ['podcast'] });
   }
 
   onDestroy(() => keyMan.unsubscribe());

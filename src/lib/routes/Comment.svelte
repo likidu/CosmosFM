@@ -29,6 +29,12 @@
   } else {
     loadMoreTitle = 'End of list';
   }
+
+  function headerTitle(count: number): string {
+    if (count > 1) return `${count} comments`;
+    else if ((count = 1)) return '1 comment';
+    else 'No comments';
+  }
 </script>
 
 <View>
@@ -37,7 +43,7 @@
   {:else if $comments.status === 'error'}
     <Typography align="center">Error!</Typography>
   {:else}
-    <ViewHeader title={`Comments ${$comments.data.pages[0].totalCount.toString()}`} />
+    <ViewHeader title={headerTitle($comments.data.pages[0].totalCount)} />
     <ViewContent>
       {#each $comments.data.pages as page, i}
         {#each page.data as comment, j}

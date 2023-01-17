@@ -1,7 +1,7 @@
 /**
  * Requests that will save to store using svelte-query
  **/
-import { useInfiniteQuery, useQuery } from '@sveltestack/svelte-query';
+import { createInfiniteQuery, createQuery } from '@tanstack/svelte-query';
 
 import { client } from '@/lib/services';
 
@@ -38,7 +38,7 @@ const discoveryList = async (pageParam?: DiscoveryListMoreKey): Promise<Discover
 // export const useDiscoveryList = () => useQuery(['discovery'], () => discoveryList());
 
 export const useDiscoveryList = () =>
-  useInfiniteQuery(['discovery'], ({ pageParam }) => discoveryList(pageParam), {
+  createInfiniteQuery(['discovery'], ({ pageParam }) => discoveryList(pageParam), {
     getNextPageParam: (lastList) => {
       return lastList.loadMoreKey ? lastList.loadMoreKey : undefined;
     },
@@ -58,7 +58,7 @@ const episode = async (eid: string): Promise<Episode> => {
 // Tip on use for multiple components: Episode and Player:
 // https://github.com/SvelteStack/svelte-query/issues/95#issuecomment-1210381083
 export const useEpisode = (eid: string) =>
-  useQuery(['episode', eid], () => episode(eid), { enabled: !!eid, refetchOnWindowFocus: false });
+  createQuery(['episode', eid], () => episode(eid), { enabled: !!eid, refetchOnWindowFocus: false });
 
 /**
  * Individual Podcast
@@ -70,7 +70,7 @@ const podcast = async (pid: string): Promise<Podcast> => {
   return data.data;
 };
 
-export const usePodcast = (pid: string) => useQuery(['podcast', pid], () => podcast(pid));
+export const usePodcast = (pid: string) => createQuery(['podcast', pid], () => podcast(pid));
 
 /**
  * Comment list
@@ -88,7 +88,7 @@ const commentList = async (eid: string, pageParam: CommentLoadMoreKey): Promise<
 
 // {querykey, pageParam} are what pass to the queryFn
 export const useCommentList = (eid: string) =>
-  useInfiniteQuery(['comment-list', eid], ({ pageParam }) => commentList(eid, pageParam), {
+  createInfiniteQuery(['comment-list', eid], ({ pageParam }) => commentList(eid, pageParam), {
     getNextPageParam: (lastList) => {
       return lastList.loadMoreKey ? lastList.loadMoreKey : undefined;
     },
@@ -106,7 +106,7 @@ const episodeList = async (pid: string, limit = 15): Promise<EpisodeList> => {
   return data;
 };
 
-export const useEpisodeList = (pid: string) => useQuery('episode-list', () => episodeList(pid));
+export const useEpisodeList = (pid: string) => createQuery(['episode-list'], () => episodeList(pid));
 
 /**
  * Inbox list
@@ -118,7 +118,7 @@ const inboxList = async (limit = 10): Promise<InboxList> => {
   return data;
 };
 
-export const useInboxList = () => useQuery('inbox-list', () => inboxList());
+export const useInboxList = () => createQuery(['inbox-list'], () => inboxList());
 
 /**
  * Subscription list
@@ -130,7 +130,7 @@ const subscriptionList = async (limit = 20): Promise<SubscriptionList> => {
   return data;
 };
 
-export const useSubscriptionList = () => useQuery('subscription-list', () => subscriptionList());
+export const useSubscriptionList = () => createQuery(['subscription-list'], () => subscriptionList());
 
 /**
  * Search
@@ -141,7 +141,7 @@ const searchPreset = async (): Promise<SearchPreset[]> => {
   return data.data;
 };
 
-export const useSearchPreset = () => useQuery('search-preset', () => searchPreset());
+export const useSearchPreset = () => createQuery(['search-preset'], () => searchPreset());
 
 /**
  * Search result list
@@ -154,7 +154,7 @@ const searchResultList = async (keyword: string): Promise<SearchResultList> => {
   return data;
 };
 
-export const useSearchResultList = (keyword: string) => useQuery('search-result', () => searchResultList(keyword));
+export const useSearchResultList = (keyword: string) => createQuery(['search-result'], () => searchResultList(keyword));
 
 /**
  * User stats
@@ -166,4 +166,4 @@ const userStats = async (uid: string): Promise<UserStats> => {
   return data.data;
 };
 
-export const useUserStats = (uid: string) => useQuery('user-stats', () => userStats(uid));
+export const useUserStats = (uid: string) => createQuery(['user-stats'], () => userStats(uid));

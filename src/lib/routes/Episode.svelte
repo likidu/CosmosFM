@@ -7,27 +7,26 @@
 </script>
 
 <script lang="ts">
-  import { load, play } from '@/lib/components/Audio.svelte';
-  import { player } from '@/lib/stores/player';
-  import Icon from '@/ui/components/icon/Icon.svelte';
-  import NavItem from '@/ui/components/nav/NavItem.svelte';
-  import Typography from '@/ui/components/text/Typography.svelte';
-  import View from '@/ui/components/view/View.svelte';
-  import ViewContent from '@/ui/components/view/ViewContent.svelte';
-  import { IconSize, RenderState } from '@/ui/enums';
-  import { IconChevronRight, IconComment, IconMenu } from '@/ui/icons';
-  import { appMenu } from '@/ui/stores';
-
   import { OnyxKeys } from 'onyx-keys';
   import { onDestroy } from 'svelte';
   import { push } from 'svelte-spa-router';
   import Time from 'svelte-time';
 
-  import { Cosmos, useEpisode } from '@/lib/services';
+  import Icon from '@/ui/components/icon/Icon.svelte';
+  import NavItem from '@/ui/components/nav/NavItem.svelte';
   import SoftKey from '@/ui/components/softkey/SoftKey.svelte';
+  import Typography from '@/ui/components/text/Typography.svelte';
+  import View from '@/ui/components/view/View.svelte';
+  import ViewContent from '@/ui/components/view/ViewContent.svelte';
   import ViewFooter from '@/ui/components/view/ViewFooter.svelte';
   import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
+  import { IconSize, RenderState } from '@/ui/enums';
+  import { IconChevronRight, IconComment, IconMenu } from '@/ui/icons';
+  import { appMenu } from '@/ui/stores';
 
+  import { load, play } from '@/lib/components/Audio.svelte';
+  import { Cosmos, useEpisode } from '@/lib/services';
+  import { player } from '@/lib/stores/player';
   import { formatSeconds } from '@/lib/utils';
 
   export let params: { eid: string };
