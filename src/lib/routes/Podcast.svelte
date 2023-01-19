@@ -4,6 +4,7 @@
   import { onDestroy } from 'svelte';
   import { push } from 'svelte-spa-router';
 
+  import Button from '@/ui/components/buttons/Button.svelte';
   import Icon from '@/ui/components/icon/Icon.svelte';
   import ListHeader from '@/ui/components/list/ListHeader.svelte';
   import ListItem from '@/ui/components/list/ListItem.svelte';
@@ -25,6 +26,7 @@
   export let params: { pid: string };
 
   let pid: string;
+  let loadMoreTitle: string;
 
   const podcast = usePodcast(params.pid);
   const episodeList = useEpisodeList(params.pid);
@@ -73,6 +75,14 @@
     else keyMan.disable();
   }
 
+  $: if ($episodeList.isFetching) {
+    loadMoreTitle = 'Loading more...';
+  } else if ($episodeList.hasNextPage) {
+    loadMoreTitle = 'Load more';
+  } else {
+    loadMoreTitle = 'End of list';
+  }
+
   function updateSubscription(pid: string, mode: SubscriptionMode) {
     Cosmos.updateSubscription(pid, mode);
     queryClient.invalidateQueries({ queryKey: ['podcast'] });
@@ -82,11 +92,13 @@
 </script>
 
 <View>
-  {#if $podcast.status === 'loading'}
+  {#if $podcast.isLoading}
     <Typography align="center">Loading...</Typography>
-  {:else if $podcast.status === 'error'}
+  {/if}
+  {#if $podcast.error}
     <Typography align="center">Error!</Typography>
-  {:else}
+  {/if}
+  {#if $podcast.isSuccess}
     {@const podcast = $podcast.data}
     {@const podcastColor = podcast.color.dark}
     <ViewHeader title={podcast.title} style={`color: ${podcastColor}`} />
@@ -109,27 +121,38 @@
           {/if}
         </div>
       </div>
-      {#if $episodeList.status === 'loading'}
+      {#if $episodeList.isLoading}
         <Typography align="center">Loading...</Typography>
-      {:else if $episodeList.status === 'error'}
+      {/if}
+      {#if $episodeList.error}
         <Typography align="center">Error!</Typography>
-      {:else}
-        {@const list = $episodeList.data}
-        <ListHeader title="Last 20 Episodes" />
-        {#each list.data as episode, i}
-          <ListItem
-            icon={IconPodcast}
-            align={Alignment.Top}
-            navi={{ itemId: `EPISODE_${i + 1}`, onSelect: () => push(`/episode/${episode.eid}`) }}
-          >
-            <svelte:fragment slot="primaryText">
-              <LineClamp><span>{episode.title}</span></LineClamp>
-            </svelte:fragment>
-            <svelte:fragment slot="bottom">
-              <LineClamp><span class="text-sm text-secondary">{episode.description}</span></LineClamp>
-            </svelte:fragment>
-          </ListItem>
+      {/if}
+      {#if $episodeList.isSuccess}
+        <ListHeader title="Last Episodes" />
+        {#each $episodeList.data.pages as page, i}
+          {#each page.data as episode, j}
+            <ListItem
+              icon={IconPodcast}
+              align={Alignment.Top}
+              navi={{ itemId: `EPISODE_${i + 1}+${j + 1}`, onSelect: () => push(`/episode/${episode.eid}`) }}
+            >
+              <svelte:fragment slot="primaryText">
+                <LineClamp><span>{episode.title}</span></LineClamp>
+              </svelte:fragment>
+              <svelte:fragment slot="bottom">
+                <LineClamp><span class="text-sm text-secondary">{episode.description}</span></LineClamp>
+              </svelte:fragment>
+            </ListItem>
+          {/each}
         {/each}
+        <Button
+          title={loadMoreTitle}
+          disabled={!$episodeList.hasNextPage || $episodeList.isFetchingNextPage}
+          navi={{
+            itemId: 'COMMENT_LOAD_MORE',
+            onSelect: () => $episodeList.fetchNextPage(),
+          }}
+        />
       {/if}
     </ViewContent>
     <ViewFooter>

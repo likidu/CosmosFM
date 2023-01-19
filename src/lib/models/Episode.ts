@@ -47,17 +47,15 @@ export type Episode = {
   payType: 'FREE';
 };
 
+export type EpisodeLoadMoreKey = {
+  pubDate: string;
+  id: string;
+  direction: 'NEXT';
+};
+
 export type EpisodeList = {
   data: Episode[];
-  loadNextKey: {
-    pubDate: string;
-    id: string;
-    direction: 'NEXT';
-  };
-  loadMoreKey: {
-    pubDate: string;
-    id: string;
-    direction: 'NEXT';
-  };
+  loadNextKey: EpisodeLoadMoreKey;
+  loadMoreKey: EpisodeLoadMoreKey;
   total: number;
 };

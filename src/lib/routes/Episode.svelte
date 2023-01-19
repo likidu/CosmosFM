@@ -53,7 +53,7 @@
         push('/player');
       },
       onSoftRight: async () => {
-        if (hasComment) push(`/comment/${eid}`);
+        push(`/comment/${eid}`);
       },
     },
     { priority: 3 },
@@ -87,7 +87,7 @@
     <ViewHeader title={episode.podcast.title} style={`color: ${podcastColor}`} />
     <ViewContent>
       <div class="episode-content">
-        <img src={episode.podcast.image.thumbnailUrl} alt="Podcast Cover" class="rounded-sm w-20 h-20" />
+        <img src={episode.podcast.image.thumbnailUrl} alt="Podcast Cover" class="rounded-md w-20 h-20" />
         <h1>{episode.title}</h1>
         <NavItem
           navi={{
@@ -118,7 +118,7 @@
         <div><Icon size={IconSize.Small} color={podcastColor}><IconMenu /></Icon></div>
         <div style={`color: ${podcastColor}`}>Play</div>
         <div class="flex items-center">
-          <Icon size={IconSize.Small} color={podcastColor} disabled={!hasComment}><IconComment /></Icon>
+          <Icon size={IconSize.Small} color={podcastColor}><IconComment /></Icon>
           {#if hasComment}
             <span class="text-sm" style={`color: ${podcastColor}`}>{episode.commentCount}</span>
           {/if}

@@ -2,7 +2,7 @@
   "id": "cosmosfm",
   "name": "Cosmos.FM",
   "description": "A Cosmos FM client for KaiOS",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "launch_path": "/index.html",
   "icons": {
     "112": "/icons/icon_112.png",

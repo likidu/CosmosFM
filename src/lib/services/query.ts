@@ -14,6 +14,7 @@ import type {
   DiscoveryListRequest,
   Episode,
   EpisodeList,
+  EpisodeLoadMoreKey,
   InboxList,
   Podcast,
   SearchPreset,
@@ -98,15 +99,23 @@ export const useCommentList = (eid: string) =>
 /**
  * Episode List
  * @param pid
- * @param limit
+ * @param limit = 10
  * @returns EpisodeList
  */
-const episodeList = async (pid: string, limit = 15): Promise<EpisodeList> => {
-  const { data } = await client.post('/episode/list', { pid, limit });
+const episodeList = async (pid: string, pageParam: EpisodeLoadMoreKey, limit = 10): Promise<EpisodeList> => {
+  const { data } = await client.post('/episode/list', { pid, limit, ...(!!pageParam && { loadMoreKey: pageParam }) });
   return data;
 };
 
-export const useEpisodeList = (pid: string) => createQuery(['episode-list'], () => episodeList(pid));
+// export const useEpisodeList = (pid: string) => createQuery(['episode-list'], () => episodeList(pid));
+
+export const useEpisodeList = (pid: string) =>
+  createInfiniteQuery(['episode-list', pid], ({ pageParam }) => episodeList(pid, pageParam), {
+    getNextPageParam: (lastList) => {
+      return lastList.loadMoreKey ? lastList.loadMoreKey : undefined;
+    },
+    retry: false,
+  });
 
 /**
  * Inbox list

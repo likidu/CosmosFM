@@ -39,6 +39,8 @@
           // Only play when buffered
           if ($player.buffered > $player.progress) play();
         } else {
+          // Try rewind 1s for audio to load up
+          skip(-1);
           pause();
         }
       },
@@ -140,7 +142,7 @@
           <Icon size={IconSize.Small} color={podcastColor}><IconForward /></Icon>
         </div>
         <div class="flex items-center">
-          <Icon size={IconSize.Small} color={podcastColor} disabled={!hasComment}><IconComment /></Icon>
+          <Icon size={IconSize.Small} color={podcastColor}><IconComment /></Icon>
           {#if hasComment}
             <span class="text-sm" style={`color: ${podcastColor}`}>{episode.commentCount}</span>
           {/if}
