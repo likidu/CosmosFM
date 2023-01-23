@@ -40,8 +40,8 @@
           if ($player.buffered > $player.progress) play();
         } else {
           // Try rewind 1s for audio to load up
-          skip(-1);
           pause();
+          skip(-3);
         }
       },
       onSoftLeft: async () => {
