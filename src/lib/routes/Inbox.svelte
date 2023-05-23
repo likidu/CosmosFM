@@ -33,11 +33,11 @@
 <View>
   <ViewHeader title="Inbox" />
   <ViewContent>
-    {#if $inbox.status === 'loading'}
+    {#if $inbox.isLoading}
       <Typography align="center">Loading...</Typography>
-    {:else if $inbox.status === 'error'}
-      <Typography align="center">Error!</Typography>
-    {:else}
+    {:else if $inbox.isError}
+      <Typography align="center">{$inbox.error}</Typography>
+    {:else if $inbox.isSuccess}
       <div>
         {#each $inbox.data.data as episode, i}
           <EpisodeItem {episode} idx={i} icon="podcast" />

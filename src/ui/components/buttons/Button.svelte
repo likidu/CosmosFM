@@ -26,18 +26,13 @@
   </button>
 </NavItem>
 
-<style>
+<style lang="postcss">
   .root {
+    @apply w-full uppercase font-bold flex items-center mx-0 border-0;
     outline: none;
-    border: none;
     background: none;
-    width: 100%;
     padding: 5px;
     margin: 5px 0;
-    text-transform: uppercase;
-    font-weight: var(--bold-font-weight);
-    display: flex;
-    align-items: center;
     /* justify-content: center; */
   }
   .icon {

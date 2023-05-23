@@ -21,8 +21,8 @@
   let params: URLSearchParams;
 
   // Input fields
-  let area = '+1';
-  let mobile = '2067711184';
+  let area = '+86';
+  let mobile = '13817930979';
   let code = '';
 
   // Step specific texts
@@ -157,7 +157,7 @@
       />
     {:else if params.get('step') === Step.Login}
       <Typography align="center" padding="both">Enter your verification code</Typography>
-      <InputRow label="Verify code" value={code} placeholder="Verify code..." onChange={(val) => (code = val)} />
+      <InputRow label="Verify code" placeholder="Enter code..." onChange={(val) => (code = val)} />
       <Button
         title="Login"
         navi={{

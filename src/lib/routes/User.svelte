@@ -3,17 +3,16 @@
 
   import Button from '@/ui/components/buttons/Button.svelte';
   import Divider from '@/ui/components/divider/Divider.svelte';
+  import FormRow from '@/ui/components/form/FormRow.svelte';
   import SelectRow from '@/ui/components/form/SelectRow.svelte';
-  import ListItem from '@/ui/components/list/ListItem.svelte';
   import Typography from '@/ui/components/text/Typography.svelte';
   import View from '@/ui/components/view/View.svelte';
   import ViewContent from '@/ui/components/view/ViewContent.svelte';
   import ViewFooter from '@/ui/components/view/ViewFooter.svelte';
   import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
-  import { Color, IconSize } from '@/ui/enums';
+  import { Color } from '@/ui/enums';
   import { IconSubscriptions } from '@/ui/icons';
   import { Onyx } from '@/ui/services';
-  import { getShortcutFromIndex } from '@/ui/utils/getShortcutFromIndex';
 
   import { stop } from '@/lib/components/Audio.svelte';
   import { themes } from '@/lib/configs/themes';
@@ -22,8 +21,6 @@
   import { user } from '@/lib/stores/user';
   import { formatSeconds } from '@/lib/utils';
   import type { Settings } from '../models';
-
-  let items = new Array(3).fill(null);
 
   const userStats = useUserStats($user.uid);
 
@@ -70,11 +67,11 @@
 <View>
   <ViewHeader title="User" />
   <ViewContent>
-    {#if $userStats.status === 'loading'}
+    {#if $userStats.isLoading}
       <Typography align="center">Loading...</Typography>
-    {:else if $userStats.status === 'error'}
-      <Typography align="center">Error!</Typography>
-    {:else}
+    {:else if $userStats.isError}
+      <Typography align="center">{$userStats.error}</Typography>
+    {:else if $userStats.isSuccess}
       {@const time = formatSeconds($userStats.data.totalPlayedSeconds, 'array')}
       {#if $user}
         <div class="user-stats">
@@ -109,10 +106,10 @@
       {/if}
     {/if}
     <Divider />
-    <ListItem
+    <FormRow
+      label="Subscriptions"
       icon={IconSubscriptions}
-      imageSize={IconSize.Small}
-      primaryText="Subscriptions"
+      align="left"
       navi={{
         itemId: 'SETTINGS_SUBSCRIPTION',
         onSelect: () => push('/subscription'),
@@ -127,18 +124,6 @@
       ]}
       onChange={(val) => handleChange('themeId', val)}
     />
-    {#each items as item, i}
-      <ListItem
-        imageUrl="https://place-hold.it/32x32&text="
-        primaryText={`Primary Text ${i + 1}`}
-        secondaryText="Secondary text"
-        navi={{
-          itemId: `${i + 1}`,
-          shortcutKey: getShortcutFromIndex(i),
-          onSelect: () => {},
-        }}
-      />
-    {/each}
     <Button
       title="Logout"
       color={Color.Primary}
