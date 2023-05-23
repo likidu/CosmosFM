@@ -21,6 +21,7 @@
   import LineClamp from '@/lib/components/LineClamp.svelte';
   import { useEpisode } from '@/lib/services';
   import { player } from '@/lib/stores/player';
+  import { settings } from '@/lib/stores/settings';
 
   let eid: string;
   let progress = 0;
@@ -106,13 +107,15 @@
     <ViewContent>
       <Typography align="center">Nothing is playing...</Typography>
     </ViewContent>
-  {:else if $episode.status === 'loading'}
+  {:else if $episode.isLoading}
     <Typography align="center">Loading...</Typography>
-  {:else if $episode.status === 'error'}
-    <Typography align="center">Error!</Typography>
-  {:else}
+  {:else if $episode.isError}
+    <Typography align="center">{$episode.error}</Typography>
+  {:else if $episode.isSuccess}
     {@const episode = $episode.data}
-    {@const podcastColor = episode.podcast.color.dark}
+    {@const podcastColor = $settings.themeId.toLowerCase().includes('light')
+      ? episode.podcast.color.dark
+      : episode.podcast.color.light}
     <ViewHeader title={episode.podcast.title} style={`color: ${podcastColor}`} />
     <ViewContent>
       <div class="player-content">

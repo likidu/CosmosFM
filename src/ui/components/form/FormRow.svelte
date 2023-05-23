@@ -36,17 +36,12 @@
   </div>
 </NavItem>
 
-<style>
+<style lang="postcss">
   .root {
     border-bottom: 1px solid var(--divider-color);
   }
   .content {
-    padding: 7px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    white-space: nowrap;
-    overflow: hidden;
+    @apply flex items-center justify-between p-3 whitespace-nowrap overflow-hidden;
   }
 
   .content.align-left {

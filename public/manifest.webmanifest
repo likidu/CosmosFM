@@ -22,7 +22,7 @@
   "start_url": "/index.html",
   "orientation": "portrait-primary",
   "b2g_features": {
-    "version": "0.3.7",
+    "version": "0.3.8",
     "subtitle": "A Cosmos FM client for KaiOS",
     "type": "signed",
     "csp": "default-src *; script-src 'self'; object-src 'none'; style-src 'self' 'unsafe-inline'",

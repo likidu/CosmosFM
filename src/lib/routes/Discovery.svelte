@@ -27,11 +27,11 @@
 <View>
   <ViewHeader title="Discovery" />
   <ViewContent>
-    {#if $discoveryList.status === 'loading'}
+    {#if $discoveryList.isLoading}
       <Typography align="center">Loading...</Typography>
-    {:else if $discoveryList.status === 'error'}
-      <Typography align="center">Error!</Typography>
-    {:else}
+    {:else if $discoveryList.isError}
+      <Typography align="center">{$discoveryList.error}</Typography>
+    {:else if $discoveryList.isSuccess}
       {#each $discoveryList.data.pages as page, i}
         {#each page.data as list}
           {#if list.type === 'DISCOVERY_BANNER'}

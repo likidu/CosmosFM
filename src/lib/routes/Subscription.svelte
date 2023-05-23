@@ -34,11 +34,11 @@
 <View>
   <ViewHeader title="Subscriptions" />
   <ViewContent>
-    {#if $subscriptions.status === 'loading'}
+    {#if $subscriptions.isLoading}
       <Typography align="center">Loading...</Typography>
-    {:else if $subscriptions.status === 'error'}
-      <Typography align="center">Error!</Typography>
-    {:else}
+    {:else if $subscriptions.isError}
+      <Typography align="center">{$subscriptions.error}</Typography>
+    {:else if $subscriptions.isSuccess}
       <Grid>
         {#each $subscriptions.data.data as podcast, i}
           <GridItem

@@ -24,7 +24,7 @@
 <View>
   <ViewHeader title="Search" />
   <ViewContent>
-    <InputRow label="Keyword" value={keyword} placeholder="Enter keyword..." onChange={(val) => (keyword = val)} />
+    <InputRow placeholder="Enter keyword..." onChange={(val) => (keyword = val)} />
     <Button
       title="Search"
       disabled={!!(keyword === '')}

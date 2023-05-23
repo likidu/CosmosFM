@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { IconChevronDown } from '@/ui/icons';
   import { v4 as uuidv4 } from 'uuid';
   import { IconSize } from '../../enums';
+  import { IconChevronDown } from '../../icons';
   import type { SelectOption } from '../../models';
   import { getShortcutFromIndex } from '../../utils';
   import Icon from '../icon/Icon.svelte';

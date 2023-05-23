@@ -1,4 +1,3 @@
-const lineClamp = require('@tailwindcss/line-clamp');
 const gradients = require('tailwindcss-gradients');
 
 module.exports = {
@@ -60,5 +59,5 @@ module.exports = {
     },
     variants: {},
   },
-  plugins: [lineClamp, gradients],
+  plugins: [gradients],
 };

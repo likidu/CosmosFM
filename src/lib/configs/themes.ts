@@ -31,13 +31,13 @@ export const themes: ThemeConfig[] = [
 
       accentColorH: 200,
       accentColorS: 63.3,
-      accentColorL: 57.3,
+      accentColorL: 71.2,
 
       textColorH: 0,
       textColorS: 0,
       textColorL: 100,
 
-      focusColorA: 20,
+      focusColorA: 12,
       dividerColorA: 10,
     },
   },

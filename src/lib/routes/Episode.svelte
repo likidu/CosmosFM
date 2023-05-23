@@ -27,6 +27,7 @@
   import { load, play } from '@/lib/components/Audio.svelte';
   import { Cosmos, useEpisode } from '@/lib/services';
   import { player } from '@/lib/stores/player';
+  import { settings } from '@/lib/stores/settings';
   import { formatSeconds } from '@/lib/utils';
 
   export let params: { eid: string };
@@ -76,13 +77,15 @@
 </script>
 
 <View>
-  {#if $episode.status === 'loading'}
+  {#if $episode.isLoading}
     <Typography align="center">Loading...</Typography>
-  {:else if $episode.status === 'error'}
-    <Typography align="center">Error!</Typography>
-  {:else}
+  {:else if $episode.isError}
+    <Typography align="center">{$episode.error}</Typography>
+  {:else if $episode.isSuccess}
     {@const episode = $episode.data}
-    {@const podcastColor = episode.podcast.color.dark}
+    {@const podcastColor = $settings.themeId.toLowerCase().includes('light')
+      ? episode.podcast.color.dark
+      : episode.podcast.color.light}
     {@const time = formatSeconds(episode.duration, 'array')}
     <ViewHeader title={episode.podcast.title} style={`color: ${podcastColor}`} />
     <ViewContent>

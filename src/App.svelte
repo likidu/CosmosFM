@@ -67,11 +67,20 @@
 
   onMount(() => {
     // TODO: Fix this in a better way
-    document.addEventListener('keydown', (ev) => {
-      if (ev.key === 'Backspace' && $location !== '/' && (ev.target as any).contentEditable !== 'true') {
-        ev.preventDefault();
-      }
-    });
+    document.addEventListener(
+      'keydown',
+      (ev) => {
+        if (
+          ev.key === 'Backspace' &&
+          $location !== '/' &&
+          ev.target['tagName'] !== 'TEXTAREA' &&
+          ev.target['tagName'] !== 'INPUT'
+        ) {
+          ev.preventDefault();
+        }
+      },
+      false,
+    );
   });
 </script>
 
@@ -81,9 +90,9 @@
   {/if}
   <AppMenu slot="app-menu" />
   <QueryClientProvider client={queryClient}>
-    <Router {routes} />
+    <Router {routes} restoreScrollState={true} />
   </QueryClientProvider>
-  {#if !process.env.IS_LEGACY}
+  {#if !process.env.IS_LEGACY && $settings.themeId.toLowerCase().includes('light')}
     <StripShade />
   {/if}
 </OnyxApp>
