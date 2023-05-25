@@ -22,6 +22,7 @@
   import LineClamp from '@/lib/components/LineClamp.svelte';
   import type { SubscriptionMode } from '@/lib/models';
   import { Cosmos, useEpisodeList, usePodcast } from '@/lib/services';
+  import { COSMOS_FM_CONFIG } from '@/lib/utils';
 
   export let params: { pid: string };
 
@@ -106,11 +107,19 @@
       <div class="flex flex-col space-y-2 px-3">
         <div class="flex space-x-2">
           <LineClamp lines={4}><span>{podcast.description}</span></LineClamp>
-          <img src={podcast.image.thumbnailUrl} class="inline-box rounded-sm w-24 h-24" alt="Podcast" />
+          <img
+            src={`${podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS}`}
+            class="inline-box rounded-sm w-24 h-24"
+            alt="Podcast"
+          />
         </div>
         {#each podcast.podcasters as podcaster}
           <div class="flex items-center space-x-2">
-            <img src={podcaster.avatar.picture.thumbnailUrl} class="rounded-full w-8" alt="Podcast" />
+            <img
+              src={`${podcaster.avatar.picture.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS}`}
+              class="rounded-full w-8"
+              alt="Podcast"
+            />
             <p class="text-sm text-secondary">{podcaster.nickname}</p>
           </div>
         {/each}

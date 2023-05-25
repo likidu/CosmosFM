@@ -16,6 +16,7 @@
   import { IconInbox, IconMenu } from '@/ui/icons';
 
   import { useSubscriptionList } from '@/lib/services';
+  import { COSMOS_FM_CONFIG } from '@/lib/utils';
 
   const subscriptions = useSubscriptionList();
 
@@ -47,7 +48,9 @@
               onSelect: () => push(`/podcast/${podcast.pid}`),
             }}
           >
-            <div class="p-2"><img src={podcast.image.smallPicUrl} alt="" /></div>
+            <div class="p-2">
+              <img src={`${podcast.image.smallPicUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS}`} alt="" />
+            </div>
           </GridItem>
         {/each}
       </Grid>

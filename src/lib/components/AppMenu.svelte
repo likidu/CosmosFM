@@ -11,6 +11,7 @@
 
   import { IconCosmos } from '@/assets/icons';
   import { user } from '@/lib/stores/user';
+  import { COSMOS_FM_CONFIG } from '@/lib/utils';
 
   type MenuItem = {
     id: string;
@@ -34,7 +35,11 @@
       <strong class="text-sm">Cosmos.FM</strong>
     </div>
     {#if $user}
-      <img src={$user.avatar.picture.thumbnailUrl} class="rounded-full w-8 h-8" alt="CosmosFM" />
+      <img
+        src={`${$user.avatar.picture.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS}`}
+        class="rounded-full w-8 h-8"
+        alt="CosmosFM"
+      />
     {/if}
   </div>
   <div class="scroller" data-nav-scroller>

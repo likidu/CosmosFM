@@ -28,7 +28,7 @@
   import { Cosmos, useEpisode } from '@/lib/services';
   import { player } from '@/lib/stores/player';
   import { settings } from '@/lib/stores/settings';
-  import { formatSeconds } from '@/lib/utils';
+  import { COSMOS_FM_CONFIG, formatSeconds } from '@/lib/utils';
 
   export let params: { eid: string };
 
@@ -90,7 +90,11 @@
     <ViewHeader title={episode.podcast.title} style={`color: ${podcastColor}`} />
     <ViewContent>
       <div class="episode-content">
-        <img src={episode.podcast.image.thumbnailUrl} alt="Podcast Cover" class="rounded-md w-20 h-20" />
+        <img
+          src={`${episode.podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS}`}
+          alt="Podcast Cover"
+          class="rounded-md w-20 h-20"
+        />
         <h1>{episode.title}</h1>
         <NavItem
           navi={{

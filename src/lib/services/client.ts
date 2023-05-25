@@ -1,9 +1,9 @@
+import type { AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios';
 import axios from 'axios';
-import type { AxiosResponse, AxiosRequestConfig, AxiosPromise, AxiosError } from 'axios';
 import { get } from 'svelte/store';
 
+import { API_CONFIG, API_ENDPOINT } from '@/lib/configs/cosmosConfig';
 import type { RefreshTokenResponse } from '@/lib/models';
-import { API_ENDPOINT, API_CONFIG } from '@/lib/configs/cosmosConfig';
 import { tokens } from '@/lib/stores/user';
 
 /**
@@ -63,7 +63,6 @@ const handleRject = async (error: AxiosError): Promise<AxiosError> => {
     if (refreshToken) {
       const { data } = await appAuthTokensRefresh(refreshToken);
       if (data.success) {
-        // TODO: fix the type
         client.defaults.headers.common['x-jike-access-token'] = data['x-jike-access-token'];
 
         // Update token store and save to LocalStorage
