@@ -29,7 +29,7 @@
 </script>
 
 <View>
-  <ViewHeader title={params.keyword} />
+  <ViewHeader back={true} title={params.keyword} />
   <ViewContent>
     {#if $result.status === 'loading'}
       <Typography align="center">Loading</Typography>

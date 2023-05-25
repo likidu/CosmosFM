@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { SvelteComponent } from 'svelte';
-  import { IconSize } from '../../enums';
 
+  import { IconSize } from '../../enums';
   import type { ContextMenu, Navigation } from '../../models';
   import Icon from '../icon/Icon.svelte';
   import NavItem from '../nav/NavItem.svelte';

@@ -36,7 +36,7 @@
     </div>
     {#if $user}
       <img
-        src={`${$user.avatar.picture.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS}`}
+        src={`${$user.avatar.picture.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_4}`}
         class="rounded-full w-8 h-8"
         alt="CosmosFM"
       />

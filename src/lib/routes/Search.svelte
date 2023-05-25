@@ -8,9 +8,9 @@
   import Typography from '@/ui/components/text/Typography.svelte';
   import View from '@/ui/components/view/View.svelte';
   import ViewContent from '@/ui/components/view/ViewContent.svelte';
+  import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
 
   import { useSearchPreset } from '@/lib/services';
-  import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
 
   let keyword = '';
 
@@ -24,7 +24,7 @@
 <View>
   <ViewHeader title="Search" />
   <ViewContent>
-    <InputRow placeholder="Enter keyword..." onChange={(val) => (keyword = val)} />
+    <InputRow label="Keyword" placeholder="Enter keyword..." onChange={(val) => (keyword = val)} />
     <Button
       title="Search"
       disabled={!!(keyword === '')}

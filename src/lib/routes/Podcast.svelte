@@ -22,7 +22,8 @@
   import LineClamp from '@/lib/components/LineClamp.svelte';
   import type { SubscriptionMode } from '@/lib/models';
   import { Cosmos, useEpisodeList, usePodcast } from '@/lib/services';
-  import { COSMOS_FM_CONFIG } from '@/lib/utils';
+  import { settings } from '@/lib/stores/settings';
+  import { COSMOS_FM_CONFIG, placeholderImage } from '@/lib/utils';
 
   export let params: { pid: string };
 
@@ -101,14 +102,14 @@
   {/if}
   {#if $podcast.isSuccess}
     {@const podcast = $podcast.data}
-    {@const podcastColor = podcast.color.dark}
+    {@const podcastColor = $settings.themeId.toLowerCase().includes('light') ? podcast.color.dark : podcast.color.light}
     <ViewHeader title={podcast.title} style={`color: ${podcastColor}`} />
     <ViewContent>
       <div class="flex flex-col space-y-2 px-3">
         <div class="flex space-x-2">
           <LineClamp lines={4}><span>{podcast.description}</span></LineClamp>
           <img
-            src={`${podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS}`}
+            src={`${podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_1}` ?? placeholderImage}
             class="inline-box rounded-sm w-24 h-24"
             alt="Podcast"
           />
@@ -116,7 +117,7 @@
         {#each podcast.podcasters as podcaster}
           <div class="flex items-center space-x-2">
             <img
-              src={`${podcaster.avatar.picture.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS}`}
+              src={`${podcaster.avatar.picture.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_1}`}
               class="rounded-full w-8"
               alt="Podcast"
             />

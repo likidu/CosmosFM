@@ -49,7 +49,7 @@
             }}
           >
             <div class="p-2">
-              <img src={`${podcast.image.smallPicUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS}`} alt="" />
+              <img src={`${podcast.image.smallPicUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_4}`} alt="" />
             </div>
           </GridItem>
         {/each}

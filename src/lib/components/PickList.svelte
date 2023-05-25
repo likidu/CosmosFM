@@ -6,17 +6,16 @@
   import { Alignment } from '@/ui/enums';
 
   import LineClamp from '@/lib/components/LineClamp.svelte';
-  import type { EditorPickList } from '@/lib/models';
+  import type { DailyPicks } from '@/lib/models';
+  import { COSMOS_FM_CONFIG } from '@/lib/utils';
 
-  export let list: EditorPickList;
-
-  const { data } = list;
+  export let list: DailyPicks;
 </script>
 
-<ListHeader title={data.date} />
-{#each data.picks as pick, i}
+<ListHeader title={list.date} />
+{#each list.picks as pick, i}
   <ListItem
-    imageUrl={pick.episode.podcast.image.thumbnailUrl}
+    imageUrl={`${pick.episode.podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_1}`}
     align={Alignment.Top}
     secondaryText={pick.episode.podcast.title}
     navi={{ itemId: `EDITOR_PICK_${i + 1}`, onSelect: () => push(`/episode/${pick.episode.eid}`) }}

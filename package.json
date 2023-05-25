@@ -1,12 +1,13 @@
 {
   "name": "cosmosfm",
-  "version": "0.3.8",
+  "version": "0.3.9",
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development vite",
-    "build": "vite build",
+    "build": "node ./scripts/update_version.js && cross-env NODE_ENV=production vite build",
     "build:legacy": "cross-env IS_LEGACY=true vite build",
     "preview": "vite preview",
+    "version": "npx genversion --es6 --semi ./src/lib/utils/version.js",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "postinstall": "patch-package"
   },
@@ -24,6 +25,7 @@
     "axios": "^1.4.0",
     "cross-env": "^7.0.3",
     "cssnano": "^6.0.1",
+    "genversion": "^3.1.1",
     "highlight-words": "^1.2.2",
     "kaios-lib": "^1.6.0",
     "onyx-keys": "^1.2.0",

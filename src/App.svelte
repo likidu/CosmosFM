@@ -13,8 +13,10 @@
   import { player } from '@/lib/stores/player';
 
   import {
+    Category,
     Comment,
     Discovery,
+    DiscoveryHistory,
     Episode,
     Inbox,
     Login,
@@ -33,6 +35,7 @@
 
   const routes = {
     '/': Discovery,
+    '/discovery-history': DiscoveryHistory,
     '/login': Login,
     '/inbox': Inbox,
     '/episode/:eid': Episode,
@@ -40,6 +43,7 @@
     '/player': Player,
     '/search/': Search,
     '/subscription': Subscription,
+    '/category': Category,
     '/search/:keyword': SearchResult,
     '/user': User,
     '/comment/:eid': Comment,

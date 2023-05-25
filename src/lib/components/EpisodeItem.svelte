@@ -10,7 +10,7 @@
 
   import LineClamp from '@/lib/components/LineClamp.svelte';
   import type { Episode } from '@/lib/models';
-  import { placeholderImage } from '@/lib/utils';
+  import { COSMOS_FM_CONFIG, placeholderImage } from '@/lib/utils';
 
   export let episode: Episode;
   export let idx: number;
@@ -32,7 +32,7 @@
   {@const url = episode.image && icon === 'episode' ? episode.image.thumbnailUrl : episode.podcast.image.thumbnailUrl}
 
   <ListItem
-    imageUrl={url ?? placeholderImage}
+    imageUrl={`${url}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_1}` ?? placeholderImage}
     align={Alignment.Top}
     navi={{ itemId: `${episode.type}_${idx + 1}`, onSelect: () => push(`/episode/${episode.eid}`) }}
   >

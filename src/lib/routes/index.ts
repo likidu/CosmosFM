@@ -1,5 +1,7 @@
+export { default as Category } from './Category.svelte';
 export { default as Comment } from './Comment.svelte';
 export { default as Discovery } from './Discovery.svelte';
+export { default as DiscoveryHistory } from './DiscoveryHistory.svelte';
 export { default as Episode } from './Episode.svelte';
 export { default as Inbox } from './Inbox.svelte';
 export { default as Login } from './Login.svelte';

@@ -1,11 +1,13 @@
 <script lang="ts">
+  import { push } from 'svelte-spa-router';
+
   import Button from '@/ui/components/buttons/Button.svelte';
   import Typography from '@/ui/components/text/Typography.svelte';
   import View from '@/ui/components/view/View.svelte';
   import ViewContent from '@/ui/components/view/ViewContent.svelte';
 
   import Banner from '@/lib/components/Banner.svelte';
-  import EditorPickList from '@/lib/components/EditorPickList.svelte';
+  import PickList from '@/lib/components/PickList.svelte';
   import TopList from '@/lib/components/TopList.svelte';
   import { useDiscoveryList } from '@/lib/services';
   import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
@@ -35,13 +37,20 @@
       {#each $discoveryList.data.pages as page, i}
         {#each page.data as list}
           {#if list.type === 'DISCOVERY_BANNER'}
-            <Banner content={list} />
+            <Banner banners={list.data} />
           {:else if list.type === 'EDITOR_PICK'}
-            <EditorPickList {list} />
+            <PickList list={list.data} />
+            <Button
+              title="History"
+              navi={{
+                itemId: 'DISCOVERY_HISTORY_BTN',
+                onSelect: () => push('/discovery-history'),
+              }}
+            />
           {:else if list.type === 'TOP_LIST'}
-            <TopList {list} />
+            <TopList list={list.data} />
           {:else if list.type === 'DISCOVERY_COLLECTION'}
-            <DiscoveryLoadMoreList {list} />
+            <DiscoveryLoadMoreList list={list.data} />
           {/if}
         {/each}
       {/each}

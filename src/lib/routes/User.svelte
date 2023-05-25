@@ -16,11 +16,11 @@
 
   import { stop } from '@/lib/components/Audio.svelte';
   import { themes } from '@/lib/configs/themes';
+  import type { Settings } from '@/lib/models';
   import { Cosmos, useUserStats } from '@/lib/services';
   import { settings } from '@/lib/stores/settings';
   import { user } from '@/lib/stores/user';
-  import { formatSeconds } from '@/lib/utils';
-  import type { Settings } from '../models';
+  import { formatSeconds, version } from '@/lib/utils';
 
   const userStats = useUserStats($user.uid);
 
@@ -115,6 +115,15 @@
         onSelect: () => push('/subscription'),
       }}
     />
+    <FormRow
+      label="Categories"
+      icon={IconSubscriptions}
+      align="left"
+      navi={{
+        itemId: 'SETTINGS_CATEGORY',
+        onSelect: () => push('/category'),
+      }}
+    />
     <SelectRow
       label="Theme"
       value={$settings.themeId}
@@ -132,6 +141,7 @@
         onSelect: () => logout(),
       }}
     />
+    <Typography type="caption" align="center" color="secondary">Ver {version}</Typography>
   </ViewContent>
   <ViewFooter />
 </View>

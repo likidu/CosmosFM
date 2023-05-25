@@ -122,13 +122,13 @@
       <div class="player-content">
         {#if episode.image}
           <img
-            src={`${episode.image.smallPicUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS}`}
+            src={`${episode.image.smallPicUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_4}`}
             alt="Episode Cover"
             width={imageSize}
           />
         {:else}
           <img
-            src={`${episode.podcast.image.smallPicUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS}`}
+            src={`${episode.podcast.image.smallPicUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_4}`}
             alt="Podcast Cover"
             width={imageSize}
           />

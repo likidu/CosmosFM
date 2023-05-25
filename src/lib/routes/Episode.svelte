@@ -91,7 +91,7 @@
     <ViewContent>
       <div class="episode-content">
         <img
-          src={`${episode.podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS}`}
+          src={`${episode.podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_4}`}
           alt="Podcast Cover"
           class="rounded-md w-20 h-20"
         />
