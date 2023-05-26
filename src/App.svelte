@@ -47,6 +47,7 @@
     '/category/story': Category,
     '/category/game': Category,
     '/category/talk-show': Category,
+    '/category/social': Category,
     '/search/:keyword': SearchResult,
     '/user': User,
     '/comment/:eid': Comment,

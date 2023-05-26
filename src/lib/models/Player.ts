@@ -8,10 +8,8 @@ export type Player = {
 };
 
 // Wraps in "data" key
-export type PlaybackProgress = [
-  {
-    eid: string;
-    pid: string;
-    progress: number;
-  },
-];
+export type PlaybackProgress = {
+  eid: string;
+  pid: string;
+  progress: number;
+};

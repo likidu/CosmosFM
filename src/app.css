@@ -73,3 +73,7 @@ input {
 ::-webkit-scrollbar {
   display: none;
 }
+
+.list-item-comment {
+  @apply p-1;
+}

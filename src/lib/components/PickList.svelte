@@ -24,7 +24,7 @@
       <LineClamp><span>{pick.episode.title}</span></LineClamp>
     </svelte:fragment>
     <svelte:fragment slot="bottom">
-      <LineClamp class="pick-comment">
+      <LineClamp class="list-item-comment ">
         <p class="text-sm pl-2 border-l border-divider">
           <strong>{pick.comment.author.nickname}: </strong>{pick.comment.text}
         </p>
@@ -32,9 +32,3 @@
     </svelte:fragment>
   </ListItem>
 {/each}
-
-<style lang="postcss">
-  :global(.pick-comment) {
-    @apply p-1;
-  }
-</style>

@@ -1,6 +1,6 @@
 {
   "name": "cosmosfm",
-  "version": "0.3.11",
+  "version": "0.3.12",
   "type": "module",
   "scripts": {
     "dev": "cross-env NODE_ENV=development vite",

@@ -41,7 +41,7 @@
       {#each $histories.data.data as list}
         <PickList {list} />
       {/each}
-      <Typography type="titleSmall" align="center">End of list</Typography>
+      <Typography type="titleSmall" align="center" color="secondary">End of list</Typography>
     {/if}
   </ViewContent>
 </View>

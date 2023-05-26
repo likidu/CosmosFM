@@ -13,5 +13,6 @@ export { default as SearchResult } from './SearchResult.svelte';
 export { default as Subscription } from './Subscription.svelte';
 export { default as User } from './User.svelte';
 export { default as Game } from './categories/Game.svelte';
+export { default as Social } from './categories/Social.svelte';
 export { default as Story } from './categories/Story.svelte';
 export { default as TalkShow } from './categories/TalkShow.svelte';

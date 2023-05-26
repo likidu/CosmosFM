@@ -147,7 +147,13 @@
         ]}
         onChange={(val) => (area = val.toString())}
       />
-      <InputRow label="Mobile" value={mobile} placeholder="Mobile number..." onChange={(val) => (mobile = val)} />
+      <InputRow
+        label="Mobile"
+        type="number"
+        value={mobile}
+        placeholder="Mobile number..."
+        onChange={(val) => (mobile = val)}
+      />
       <Button
         title="Send Code"
         navi={{
@@ -157,7 +163,7 @@
       />
     {:else if params.get('step') === Step.Login}
       <Typography align="center" padding="both">Enter your verification code</Typography>
-      <InputRow label="Verify code" placeholder="Enter code..." onChange={(val) => (code = val)} />
+      <InputRow label="Verify code" type="number" placeholder="Code..." onChange={(val) => (code = val)} />
       <Button
         title="Login"
         navi={{

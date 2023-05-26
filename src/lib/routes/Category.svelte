@@ -4,16 +4,11 @@
   import Router, { location, replace } from 'svelte-spa-router';
   import { fade } from 'svelte/transition';
 
-  import { Game, Story, TalkShow } from '@/lib/routes';
-  import Icon from '@/ui/components/icon/Icon.svelte';
-  import SoftKey from '@/ui/components/softkey/SoftKey.svelte';
+  import { Game, Social, Story, TalkShow } from '@/lib/routes';
   import Tab from '@/ui/components/tab/Tab.svelte';
   import View from '@/ui/components/view/View.svelte';
   import ViewContent from '@/ui/components/view/ViewContent.svelte';
-  import ViewFooter from '@/ui/components/view/ViewFooter.svelte';
   import ViewHeader from '@/ui/components/view/ViewHeader.svelte';
-  import { IconSize } from '@/ui/enums';
-  import { IconInbox, IconMenu } from '@/ui/icons';
 
   const prefix = '/category';
   const tabItems = [
@@ -37,12 +32,17 @@
       label: 'Talk Show',
       url: `${prefix}/talk-show`,
     },
+    {
+      label: 'Social',
+      url: `${prefix}/social`,
+    },
   ];
 
   const routes = {
     '/story': Story,
     '/game': Game,
     '/talk-show': TalkShow,
+    '/social': Social,
   };
 
   const keyMan = OnyxKeys.subscribe(
@@ -67,10 +67,4 @@
       <Router {routes} {prefix} restoreScrollState={true} />
     </div>
   </ViewContent>
-  <ViewFooter>
-    <SoftKey>
-      <div><Icon size={IconSize.Small}><IconMenu /></Icon></div>
-      <div><Icon size={IconSize.Small}><IconInbox /></Icon></div>
-    </SoftKey>
-  </ViewFooter>
 </View>

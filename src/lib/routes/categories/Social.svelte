@@ -3,4 +3,4 @@
   import { COSMOS_FM_CONFIG } from '@/lib/utils';
 </script>
 
-<CategoryList key="game" categoryId={COSMOS_FM_CONFIG.CATEGORY_ID.GAME} />
+<CategoryList key="social" categoryId={COSMOS_FM_CONFIG.CATEGORY_ID.SOCIAL} />

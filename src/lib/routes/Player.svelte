@@ -109,8 +109,8 @@
       // Playback is not empty array
       if (playback.length > 0) {
         // And saved progress is behind the service progress
-        if ($player.progress < playback[0]['progress']) {
-          skipTo(playback[0]['progress']);
+        if ($player.progress < playback[0].progress) {
+          skipTo(playback[0].progress);
         }
       } else {
         skipTo($player.progress);
