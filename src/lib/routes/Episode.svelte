@@ -41,6 +41,8 @@
     {
       onEnter: async () => {
         if (eid && eid !== $player.eid) {
+          // First, send current playback progress to server.
+          Cosmos.playerbackProgressUpdate($player.eid, $player.pid, $player.progress);
           // Stop current playing episode.
           stop();
           // Load this episode.

@@ -17,9 +17,9 @@
 
   import { formatSeconds } from '@/lib/utils';
 
-  import { pause, play, reload, skip, src } from '@/lib/components/Audio.svelte';
+  import { pause, play, reload, skip, skipTo, src } from '@/lib/components/Audio.svelte';
   import LineClamp from '@/lib/components/LineClamp.svelte';
-  import { client, useEpisode } from '@/lib/services';
+  import { Cosmos, useEpisode } from '@/lib/services';
   import { player } from '@/lib/stores/player';
   import { settings } from '@/lib/stores/settings';
   import { COSMOS_FM_CONFIG } from '@/lib/utils';
@@ -47,7 +47,7 @@
           pause();
           skip(-3);
           // Update playback progress if pid has been returned from getting playback progress ever.
-          playerbackProgressUpdate();
+          Cosmos.playerbackProgressUpdate(eid, $player.pid, $player.progress);
         }
       },
       onSoftLeft: async () => {
@@ -103,30 +103,17 @@
     else keyMan.disable();
   }
 
-  async function playbackProgressList(eid: string): Promise<PlaybackProgress[]> {
-    const { data } = await client.post('/playback-progress/list', { eids: [eid] });
-    return data.data;
-  }
-
-  async function playerbackProgressUpdate() {
-    const now = new Date().toISOString();
-    const resp = await client.post('/playback-progress/update', {
-      now,
-      data: [{ eid, pid: $player.pid, progress: Math.floor($player.progress), playedAt: now }],
-    });
-    console.log(resp.data);
-  }
-
   onMount(async () => {
     if ($player.eid) {
-      const playback: PlaybackProgress[] = await playbackProgressList($player.eid);
-      console.log(playback);
+      const playback: PlaybackProgress[] = await Cosmos.playbackProgressList($player.eid);
       // Playback is not empty array
       if (playback.length > 0) {
         // And saved progress is behind the service progress
         if ($player.progress < playback[0]['progress']) {
-          player.update({ progress: playback[0]['progress'] });
+          skipTo(playback[0]['progress']);
         }
+      } else {
+        skipTo($player.progress);
       }
     }
   });
