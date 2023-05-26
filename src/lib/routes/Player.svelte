@@ -1,7 +1,7 @@
 <script lang="ts">
   import KaiOS from 'kaios-lib';
   import { OnyxKeys } from 'onyx-keys';
-  import { onDestroy } from 'svelte';
+  import { onDestroy, onMount } from 'svelte';
   import { push } from 'svelte-spa-router';
 
   import Progressbar from '@/ui/components/form/Progressbar.svelte';
@@ -19,10 +19,11 @@
 
   import { pause, play, reload, skip, src } from '@/lib/components/Audio.svelte';
   import LineClamp from '@/lib/components/LineClamp.svelte';
-  import { useEpisode } from '@/lib/services';
+  import { client, useEpisode } from '@/lib/services';
   import { player } from '@/lib/stores/player';
   import { settings } from '@/lib/stores/settings';
   import { COSMOS_FM_CONFIG } from '@/lib/utils';
+  import type { PlaybackProgress } from '../models';
 
   let eid: string;
   let progress = 0;
@@ -31,6 +32,7 @@
 
   const imageSize = 144;
 
+  // Episode id always load from local storage
   const episode = useEpisode($player.eid);
 
   const keyMan = OnyxKeys.subscribe(
@@ -44,6 +46,8 @@
           // Try rewind 1s for audio to load up
           pause();
           skip(-3);
+          // Update playback progress if pid has been returned from getting playback progress ever.
+          playerbackProgressUpdate();
         }
       },
       onSoftLeft: async () => {
@@ -87,7 +91,7 @@
   }
 
   $: if (eid) {
-    hasComment = !!($episode.data.commentCount > 0);
+    hasComment = $episode.data.commentCount > 0;
   }
 
   // Set progress bar percent and reserve 3 fraction values (100,000 / 1,000).
@@ -98,6 +102,34 @@
     if ($player.eid) keyMan.enable();
     else keyMan.disable();
   }
+
+  async function playbackProgressList(eid: string): Promise<PlaybackProgress[]> {
+    const { data } = await client.post('/playback-progress/list', { eids: [eid] });
+    return data.data;
+  }
+
+  async function playerbackProgressUpdate() {
+    const now = new Date().toISOString();
+    const resp = await client.post('/playback-progress/update', {
+      now,
+      data: [{ eid, pid: $player.pid, progress: Math.floor($player.progress), playedAt: now }],
+    });
+    console.log(resp.data);
+  }
+
+  onMount(async () => {
+    if ($player.eid) {
+      const playback: PlaybackProgress[] = await playbackProgressList($player.eid);
+      console.log(playback);
+      // Playback is not empty array
+      if (playback.length > 0) {
+        // And saved progress is behind the service progress
+        if ($player.progress < playback[0]['progress']) {
+          player.update({ progress: playback[0]['progress'] });
+        }
+      }
+    }
+  });
 
   onDestroy(() => keyMan.unsubscribe());
 </script>

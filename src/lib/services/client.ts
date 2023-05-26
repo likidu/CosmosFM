@@ -2,12 +2,12 @@ import type { AxiosError, AxiosPromise, AxiosRequestConfig, AxiosResponse } from
 import axios from 'axios';
 import { get } from 'svelte/store';
 
-import { API_CONFIG, API_ENDPOINT } from '@/lib/configs/cosmosConfig';
 import type { RefreshTokenResponse } from '@/lib/models';
 import { tokens } from '@/lib/stores/user';
+import { COSMOS_FM_CONFIG } from '@/lib/utils';
 
 /**
- * @summary Handler of client error from acutal API calls
+ * @summary Handler of client error from actual API calls
  * @param error
  * @returns T
  */
@@ -29,7 +29,7 @@ export const clientHandleError = <T>(error: AxiosError) => {
  * @returns {AxiosPromise<RefreshTokenResponse>} x-jike-access-token, x-jike-refresh-token, success
  */
 const appAuthTokensRefresh = (refreshToken: string): AxiosPromise<RefreshTokenResponse> => {
-  return client.post(`${API_ENDPOINT}/app_auth_tokens.refresh`, '', {
+  return client.post(`${COSMOS_FM_CONFIG.API_ENDPOINT}/app_auth_tokens.refresh`, '', {
     headers: {
       'x-jike-refresh-token': refreshToken,
       'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
@@ -79,7 +79,7 @@ const handleRject = async (error: AxiosError): Promise<AxiosError> => {
   return Promise.reject(error);
 };
 
-export const client = axios.create(API_CONFIG);
+export const client = axios.create(COSMOS_FM_CONFIG.API_CONFIG);
 
 // Request interceptor for API calls
 client.interceptors.request.use(

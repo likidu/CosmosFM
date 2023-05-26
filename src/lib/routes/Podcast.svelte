@@ -109,7 +109,7 @@
         <div class="flex space-x-2">
           <LineClamp lines={4}><span>{podcast.description}</span></LineClamp>
           <img
-            src={`${podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_1}` ?? placeholderImage}
+            src={`${podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_4}` ?? placeholderImage}
             class="inline-box rounded-sm w-24 h-24"
             alt="Podcast"
           />
@@ -117,7 +117,7 @@
         {#each podcast.podcasters as podcaster}
           <div class="flex items-center space-x-2">
             <img
-              src={`${podcaster.avatar.picture.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_1}`}
+              src={`${podcaster.avatar.picture.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_8}`}
               class="rounded-full w-8"
               alt="Podcast"
             />

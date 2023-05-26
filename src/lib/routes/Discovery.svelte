@@ -24,6 +24,11 @@
   } else {
     loadMoreTitle = 'End of list';
   }
+
+  // Simply reload the page
+  $: if ($discoveryList.error?.response?.status === 401) {
+    window.location.reload();
+  }
 </script>
 
 <View>
