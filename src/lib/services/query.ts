@@ -22,6 +22,7 @@ import type {
   SubscriptionList,
   UserStats,
 } from '@/lib/models';
+import type { AxiosError } from 'axios';
 
 /**
  * Discovery list
@@ -39,7 +40,7 @@ const discoveryList = async (pageParam?: DiscoveryListMoreKey): Promise<Discover
 // export const useDiscoveryList = () => useQuery(['discovery'], () => discoveryList());
 
 export const useDiscoveryList = () =>
-  createInfiniteQuery(['discovery'], ({ pageParam }) => discoveryList(pageParam), {
+  createInfiniteQuery<DiscoveryList, AxiosError>(['discovery'], ({ pageParam }) => discoveryList(pageParam), {
     getNextPageParam: (lastList) => {
       return lastList.loadMoreKey ? lastList.loadMoreKey : undefined;
     },

@@ -16,7 +16,7 @@
   <ListHeader title={topList.title} />
   {#each topList.items as list, i}
     <ListItem
-      imageUrl={`${list.item.podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_1}`}
+      imageUrl={`${list.item.podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_8}`}
       align={Alignment.Top}
       secondaryText={list.item.podcast.title}
       navi={{ itemId: `${topList.category}_${i + 1}`, onSelect: () => push(`/episode/${list.item.eid}`) }}

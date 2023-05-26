@@ -6,6 +6,7 @@ export * from './ContextMenu';
 export * from './Dialog';
 export * from './Navigation';
 export * from './SelectOption';
+export * from './Tab';
 export * from './ThemeConfig';
 export * from './ThemeSettings';
 export * from './Toast';

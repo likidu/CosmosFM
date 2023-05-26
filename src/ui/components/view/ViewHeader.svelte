@@ -1,40 +1,42 @@
 <script lang="ts">
+  import Icon from '@/ui/components/icon/Icon.svelte';
+  import { Color, IconSize } from '@/ui/enums';
+
   import { IconChevronLeft } from '@/ui/icons';
-  import { Color, IconSize } from '../../enums';
-  import Icon from '../icon/Icon.svelte';
 
   export let title: string = undefined;
-  export let back = false;
   export let style = '';
+  export let back = false;
 </script>
 
 <div class="root">
-  {#if back}
-    <div class="icon">
-      <Icon size={IconSize.Smallest} color={Color.Accent}><IconChevronLeft /></Icon>
-    </div>
-  {/if}
-  {#if title}
-    <h2 class="title" {style}>
-      {title}
-    </h2>
-  {:else}
-    <slot />
-  {/if}
-  {#if back}
-    <div class="icon" />
-  {/if}
+  <div class="box">
+    {#if back}
+      <Icon size={IconSize.Small} color={Color.Accent}><IconChevronLeft /></Icon>
+    {/if}
+  </div>
+  <div class="box">
+    {#if title}
+      <h2 class="title" {style}>
+        {title}
+      </h2>
+    {:else}
+      <slot />
+    {/if}
+  </div>
+  <div class="box" />
 </div>
 
 <style lang="postcss">
   .root {
     @apply flex items-center overflow-hidden whitespace-nowrap px-1 py-0.5;
   }
-  .icon {
-    @apply flex justify-start w-full;
+  .box {
+    @apply flex flex-1 justify-between;
   }
   .title {
-    @apply flex-auto justify-center text-center text-accent font-bold overflow-hidden text-ellipsis px-2;
-    min-width: 160px;
+    @apply flex-auto text-center overflow-hidden text-ellipsis px-3;
+    color: var(--accent-color);
+    font-weight: 600;
   }
 </style>

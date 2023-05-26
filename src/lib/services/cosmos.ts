@@ -1,12 +1,20 @@
 /**
  * Requests that does not require to save to stores
  */
+
 import { client, clientHandleError } from '@/lib/services/client';
-
-import { user, tokens } from '@/lib/stores/user';
 import { player } from '@/lib/stores/player';
+import { tokens, user } from '@/lib/stores/user';
 
-import type { LoginWithSMS, AuthError, PhoneNumber, User, RefreshToken, SubscriptionMode } from '@/lib/models';
+import type {
+  AuthError,
+  LoginWithSMS,
+  PhoneNumber,
+  PlaybackProgress,
+  RefreshToken,
+  SubscriptionMode,
+  User,
+} from '@/lib/models';
 
 new Promise(() => {});
 
@@ -70,6 +78,19 @@ export class Cosmos {
     } catch (error) {
       return false;
     }
+  }
+
+  static async playbackProgressList(eid: string): Promise<PlaybackProgress[]> {
+    const { data } = await client.post('/playback-progress/list', { eids: [eid] });
+    return data.data;
+  }
+
+  static async playerbackProgressUpdate(eid: string, pid: string, progress: number) {
+    const now = new Date().toISOString();
+    await client.post('/playback-progress/update', {
+      now,
+      data: [{ eid, pid, progress: Math.floor(progress), playedAt: now }],
+    });
   }
 
   /**

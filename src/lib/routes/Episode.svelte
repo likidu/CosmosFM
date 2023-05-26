@@ -41,11 +41,13 @@
     {
       onEnter: async () => {
         if (eid && eid !== $player.eid) {
+          // First, send current playback progress to server.
+          Cosmos.playerbackProgressUpdate($player.eid, $player.pid, $player.progress);
           // Stop current playing episode.
           stop();
           // Load this episode.
-          const { mediaKey, duration } = $episode.data;
-          load(eid, mediaKey, duration);
+          const { pid, mediaKey, duration } = $episode.data;
+          load(eid, pid, mediaKey, duration);
           // Immediate play the episode once loaded.
           play();
           // TODO: Update playlist, remove from inbox and create episode-played

@@ -76,6 +76,7 @@ export default defineConfig({
         assetFileNames: `bundle.[hash].[ext]`,
       },
     },
+    minify: false,
   },
   resolve: {
     alias: {

@@ -37,11 +37,11 @@
 
   audio.onended = () => pause();
 
-  export function load(eid: string, mediaKey: string, duration: number) {
+  export function load(eid: string, pid: string, mediaKey: string, duration: number) {
     audio.src = mediaKey;
     audio.currentTime = 0;
 
-    player.update({ eid, duration });
+    player.update({ eid, pid, duration });
   }
 
   export function reload(mediaKey: string, progress: number) {

@@ -15,7 +15,7 @@
 <ListHeader title={list.date} />
 {#each list.picks as pick, i}
   <ListItem
-    imageUrl={`${pick.episode.podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_1}`}
+    imageUrl={`${pick.episode.podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_8}`}
     align={Alignment.Top}
     secondaryText={pick.episode.podcast.title}
     navi={{ itemId: `EDITOR_PICK_${i + 1}`, onSelect: () => push(`/episode/${pick.episode.eid}`) }}

@@ -20,7 +20,7 @@
       <!-- Only show 6 items as some list has about 10... -->
       {#if i < 6}
         <ListItem
-          imageUrl={`${item.episode.podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_1}`}
+          imageUrl={`${item.episode.podcast.image.thumbnailUrl}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_8}`}
           align={Alignment.Top}
           secondaryText={item.recommendation}
           accentText={item.episode.podcast.title}

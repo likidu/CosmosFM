@@ -32,7 +32,7 @@
   {@const url = episode.image && icon === 'episode' ? episode.image.thumbnailUrl : episode.podcast.image.thumbnailUrl}
 
   <ListItem
-    imageUrl={`${url}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_1}` ?? placeholderImage}
+    imageUrl={`${url}${COSMOS_FM_CONFIG.MEDIA_FRAGMENTS_8}` ?? placeholderImage}
     align={Alignment.Top}
     navi={{ itemId: `${episode.type}_${idx + 1}`, onSelect: () => push(`/episode/${episode.eid}`) }}
   >
